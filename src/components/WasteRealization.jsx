@@ -88,19 +88,19 @@ export function WasteRealization() {
         Desktop: Asymmetric 2-column landscape container setup.
         Mobile: Stacked linear flow (md:grid-cols-[1fr_1.2fr]).
       */}
-      <div className="layout-grid grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-10 md:gap-24 py-16 md:py-0">
+      <div className="layout-grid py-16 md:py-0">
         
         {/* Left Column Panel: Sticky Anchor Container on desktop */}
         <div 
           ref={leftColRef}
-          className="w-full md:h-screen flex flex-col justify-center py-6 md:py-0"
+          className="col-span-4 lg:col-span-5 w-full md:h-screen flex flex-col justify-center py-6 md:py-0"
         >
           <div className="flex flex-col gap-3 max-w-md">
             <span className="text-xs font-mono text-mint tracking-[0.2em] font-semibold uppercase">
               CHAPTER 2 // STRATEGIC MISSION
             </span>
             <h2 className="display-header text-[32px] md:text-[44px] lg:text-[56px] font-bold leading-[1.10] tracking-[-0.03em] text-light-cream animate-fade-in">
-              We exist to make reuse second nature for coffee lovers across India. By partnering with local cafes, we're building a seamless, circular borrow-and-return system that eliminates single-use cups entirely, keeping our oceans clean and our communities thriving.
+              We exist to make reuse second nature for beverage lovers across India. By partnering with local cafes, we're building a seamless, circular borrow-and-return system that eliminates single-use cups entirely, keeping our oceans clean and our communities thriving.
             </h2>
             <div className="w-12 h-1 bg-mint mt-6 rounded-full" />
           </div>
@@ -109,7 +109,7 @@ export function WasteRealization() {
         {/* Right Column Container: Scrollable Block Array */}
         <div 
           ref={rightColRef}
-          className="w-full flex flex-col gap-24 md:gap-40 py-10 md:py-48"
+          className="col-span-4 lg:col-span-7 w-full flex flex-col gap-12 md:gap-40 py-10 md:py-48"
         >
           {/* Data Block 1 */}
           <div 
@@ -158,9 +158,9 @@ export function WasteRealization() {
               <span className="text-white/20 font-mono text-2xl md:text-4xl font-light select-none">[</span>
               <span 
                 className="technical-figures text-2xl md:text-4xl font-black text-gold-amber tracking-tight font-sans"
-                aria-label="Takes four hundred and fifty years to decay"
+                aria-label="Takes four hundred years to decay"
               >
-                450 Years
+                400 Years
               </span>
               <span className="text-white/20 font-mono text-2xl md:text-4xl font-light select-none">]</span>
             </div>

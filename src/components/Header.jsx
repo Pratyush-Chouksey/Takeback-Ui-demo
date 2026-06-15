@@ -16,7 +16,7 @@ export function Header({ currentRoute, setRoute }) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full h-20 z-[1000] glass-panel border-b border-white/10 spring-transition hidden md:block">
+      <header className="fixed top-0 left-0 w-full h-20 z-[1000] glass-panel border-b border-white/10 spring-transition">
         <div className="max-w-[1440px] h-full mx-auto px-5 lg:px-20 flex items-center justify-between">
           
           {/* Brand Mark */}
@@ -119,7 +119,7 @@ export function Header({ currentRoute, setRoute }) {
                     setRoute(link.path);
                     setIsOpen(false);
                   }}
-                  className={`interface-text text-left text-lg font-medium spring-transition focus-visible:outline-none bg-transparent border-none cursor-pointer ${
+                  className={`nav-link interface-text text-left text-lg font-medium spring-transition focus-visible:outline-none bg-transparent border-none cursor-pointer ${
                     currentRoute === link.path ? 'text-mint font-bold' : 'text-white/80 hover:text-mint'
                   }`}
                 >

@@ -11,16 +11,22 @@ gsap.registerPlugin(ScrollTrigger);
 export function Hero({ setRoute }) {
   const containerRef = useRef(null);
 
-  // Split-text logic for staggered reveal
+  // Split-text logic for staggered reveal: group chars into words to prevent awkward text wrapping on mobile
   const titleText = "EVERY CUP BORROWED, ONE LESS CUP BINNED.";
-  const chars = titleText.split("").map((char, index) => (
-    <span key={index} className="inline-block overflow-hidden py-1">
-      <span 
-        className="char-span inline-block translate-y-full"
-        style={{ display: 'inline-block' }}
-      >
-        {char === ' ' ? '\u00A0' : char}
-      </span>
+  const words = titleText.split(" ");
+  const chars = words.map((word, wordIndex) => (
+    <span key={wordIndex} className="inline-block whitespace-nowrap">
+      {word.split("").map((char, charIndex) => (
+        <span key={charIndex} className="inline-block overflow-hidden py-1">
+          <span 
+            className="char-span inline-block translate-y-full"
+            style={{ display: 'inline-block' }}
+          >
+            {char}
+          </span>
+        </span>
+      ))}
+      {wordIndex < words.length - 1 && '\u00A0'}
     </span>
   ));
 
@@ -102,7 +108,7 @@ export function Hero({ setRoute }) {
 
           {/* Hero Subtext */}
           <p className="hero-fade-in interface-text text-base md:text-lg text-light-cream/90 max-w-xl text-center leading-[1.60] mt-2">
-            A simple, community-powered share loop designed to keep India's coffee culture clean, one delicious brew at a time.
+            A community-driven movement encouraging everyone to say no to single-use cups, one refill at a time.
           </p>
 
           {/* Multi-button action layout */}

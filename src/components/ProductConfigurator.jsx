@@ -62,7 +62,7 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
           </div>
 
           <p className="interface-text text-sm md:text-base text-black/75 leading-[1.60] max-w-lg">
-            Engineered for longevity and seamless return cycles. Double-wall vacuum configurations retain beverage temperatures while surviving thousands of commercial dishwasher washes.
+            Engineered for longevity and seamless return cycles. Double-wall vacuum configurations retain beverage temperatures while surviving 150 commercial dishwasher washes. Crafted from upcycled coffee husks (waste skins of coffee cherries) blended with 100% BPA-free and certified non-toxic food-grade circular poly-composites.
           </p>
 
           {/* Technical Specs list */}
@@ -112,7 +112,7 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
           {/* Environmental subtext warning */}
           <div className="max-w-lg mt-4 border-l-2 border-mint pl-4 py-1.5">
             <p className="font-mono text-xs text-[#1a2e22] tracking-wider uppercase font-semibold">
-              &gt;&gt; This vessel replaces 500+ single-use paper cups over its lifespan.
+              &gt;&gt; This vessel replaces 150+ single-use paper cups over its lifespan.
             </p>
           </div>
 

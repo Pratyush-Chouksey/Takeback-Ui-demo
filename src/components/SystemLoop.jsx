@@ -56,8 +56,7 @@ export function SystemLoop() {
     {
       index: '01',
       step: 'Step 01: Borrow (Scan Base QR Code)',
-      // TODO: confirm with founder
-      description: "Scan the cup's QR code at any partner café to instantly check it out.",
+      description: "Find a participating café, scan the cup's QR code at any partnered café to instantly check it out.",
       feature: (
         <div className="mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col items-center gap-3">
           {/* How It Works Icon 1: QR scan icon (assets/icon_qr_scan.png) */}
@@ -83,22 +82,21 @@ export function SystemLoop() {
     {
       index: '02',
       step: 'Step 02: Use (Insulated Husk Vessel)',
-      // TODO: confirm with founder
-      description: "Enjoy your hot or cold coffee in our insulated husk composite vessel.",
+      description: "Enjoy your hot or cold beverages in our insulated husk composite vessel.",
       feature: (
         <div className="mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col gap-2 font-mono text-xs">
           {/* How It Works Icon 2: Cup icon (assets/icon_cup.png) */}
           {/* How It Works Icon 3: Café icon (assets/icon_cafe.png) */}
           <div className="flex justify-between border-b border-black/10 pb-1.5">
-            <span className="text-black/50">MATERIAL:</span>
-            <span className="font-semibold text-black/95">Coffee Husk Composite</span>
+            <span className="text-black/50">THERMAL LOCK:</span>
+            <span className="font-semibold text-black/95">Double-wall structural lock thermal shield</span>
           </div>
           <div className="flex justify-between border-b border-black/10 pb-1.5">
-            <span className="text-black/50">THERMAL CAP:</span>
+            <span className="text-black/50">INSULATION:</span>
             <span className="font-semibold text-black/95">4 Hours Hot / Cold</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-black/50">INSULATION:</span>
+            <span className="text-black/50">DESIGN:</span>
             <span className="font-semibold text-black/95">Fluted Heat Ridges</span>
           </div>
         </div>
@@ -107,8 +105,7 @@ export function SystemLoop() {
     {
       index: '03',
       step: 'Step 03: Return (Drop Bin Node & Earn ₹15 Cashback)',
-      // TODO: confirm with founder
-      description: "Drop the cup in a smart bin to get your cashback refund instantly.",
+      description: "Once finished, return the empty cup to any partnered café drop point in our network. A staff member or scanner registers the return, instantly refunding your deposit to your digital wallet.",
       feature: (
         <div className="mt-6 p-4 rounded-lg bg-[#A3E2C9]/10 border border-[#A3E2C9]/40 flex flex-col items-center gap-2">
           {/* How It Works Icon 4: Cashback coin icon (assets/icon_cashback_coin.png) */}

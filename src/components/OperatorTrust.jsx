@@ -26,7 +26,7 @@ export function OperatorTrust() {
       metric: "45,800 cups diverted • ₹6,87,000 saved"
     },
     {
-      quote: "Operational integration was near frictionless. Bins automate returns automatically and trigger database updates directly to our inventory trackers.",
+      quote: "Operational integration was near frictionless. Partnered cafes process returns automatically and trigger database updates directly to our inventory trackers.",
       operator: "Vikram Sen, Tech Lead",
       cafe: "Third Wave Coffee, Bangalore",
       metric: "29,400 cups diverted • ₹4,41,000 saved"
@@ -178,16 +178,17 @@ export function OperatorTrust() {
               B2B PARTNERSHIP OPPORTUNITY
             </span>
             <h3 className="display-header text-xl md:text-2xl font-bold text-[#0B0F12]">
-              {/* TODO: confirm with founder */}
               Ready to transition your café to zero-waste packaging?
             </h3>
+            <p className="interface-text text-sm text-black/60">
+              Get in touch to request B2B pricing.
+            </p>
           </div>
           <MagneticButton 
             className="px-6 py-3 bg-[#0B0F12] text-light-cream hover:bg-[#1E252B] font-semibold text-xs rounded-xl tracking-wider uppercase font-sans border-none cursor-pointer flex-shrink-0"
             onClick={() => alert("Redirecting to Cafe partner hub...")}
           >
-            {/* TODO: confirm with founder */}
-            Get B2B Pricing
+            Request B2B Pricing
           </MagneticButton>
         </div>
       </div>

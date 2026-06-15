@@ -22,7 +22,7 @@ export function Shop({ activeVariant, onColorwayChange }) {
       name: 'Takeback Smart Vessel',
       price: '₹ 499.00',
       description: 'Single poly-composite insulated double-wall smart container. Base matrix QR integrated.',
-      offset: 'Replaces 500+ paper cups',
+      offset: 'Replaces 150+ paper cups',
       tag: 'BEST SELLER',
       isConfiguratorLink: true
     },
@@ -31,7 +31,7 @@ export function Shop({ activeVariant, onColorwayChange }) {
       name: 'Loop Bundle Pack (Set of 3)',
       price: '₹ 1,299.00',
       description: 'Three thermal vessels for daily multi-use rotations. Share the loop with family.',
-      offset: 'Replaces 1,500+ paper cups',
+      offset: 'Replaces 450+ paper cups',
       tag: 'FAMILY VALUE',
       isConfiguratorLink: false
     },
@@ -40,7 +40,7 @@ export function Shop({ activeVariant, onColorwayChange }) {
       name: 'Corporate Cafe Kit (Set of 50)',
       price: '₹ 18,500.00',
       description: '50 smart vessels + B2B registration tag kits for office cafeterias and events.',
-      offset: 'Replaces 25,000+ paper cups',
+      offset: 'Replaces 7,500+ paper cups',
       tag: 'ENTERPRISE',
       isConfiguratorLink: false
     }
@@ -59,7 +59,7 @@ export function Shop({ activeVariant, onColorwayChange }) {
             OWN THE VESSEL
           </h1>
           <p className="interface-text text-sm text-black/60 max-w-xl">
-            Acquire your personal hardware. Own the physical cup while linking it back to the digital UPI deposit and return network to retrieve cashback at any partner cafes.
+            Acquire your personal hardware. Own the physical cup while linking it back to the digital UPI deposit and return network to retrieve cashback at any partnered cafes.
           </p>
         </div>
 

@@ -43,7 +43,7 @@ export function ReturnMap({ triggerReward }) {
       x: 110,
       y: 310,
       dist: '0.8 km',
-      description: 'Specialty nodes featuring integrated smart return drawer bays.'
+      description: 'Specialty nodes featuring integrated return drawer bays.'
     },
     {
       id: 'araku',
@@ -53,7 +53,7 @@ export function ReturnMap({ triggerReward }) {
       x: 310,
       y: 280,
       dist: '1.9 km',
-      description: 'Flagship smart bin return node equipped with automatic weigh scale detectors.'
+      description: 'Flagship return node equipped with automatic weigh scale detectors.'
     }
   ];
 
@@ -72,7 +72,7 @@ export function ReturnMap({ triggerReward }) {
 
   return (
     <section className="min-h-screen w-full bg-[#1E252B] text-light-cream pt-28 pb-16 flex items-center justify-center">
-      <div className="layout-grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="layout-grid items-stretch gap-8">
         
         {/* Left Side: Directory of active cafes */}
         <div className="col-span-4 lg:col-span-6 flex flex-col gap-6">
@@ -84,7 +84,7 @@ export function ReturnMap({ triggerReward }) {
               DROP POINT DIRECTORY
             </h1>
             <p className="interface-text text-sm text-white/70 mt-1">
-              Select an active partner cafe below to focus coordinates. Scan the smart drop-box to return vessels and earn ₹15 cashback.
+              Locate active partnered cafes. Scan the partnered café drop-box to return vessels and earn cashback.
             </p>
           </div>
 

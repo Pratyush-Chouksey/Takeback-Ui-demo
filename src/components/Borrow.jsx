@@ -70,20 +70,16 @@ export function Borrow({ triggerReward }) {
           {/* 4-Step Borrow/Return Process List */}
           <div className="flex flex-col gap-3.5 my-6 border-t border-b border-white/10 py-5 max-w-md">
             <div className="flex gap-3 text-xs leading-relaxed">
-              {/* TODO: confirm with founder */}
-              <span className="font-mono text-mint font-bold">01 /</span> Find an active partner café on our live map to grab a fresh circular coffee vessel.
+              <span className="font-mono text-mint font-bold">01 /</span> Find an active partnered café on our live map to grab a fresh circular beverage vessel.
             </div>
             <div className="flex gap-3 text-xs leading-relaxed">
-              {/* TODO: confirm with founder */}
               <span className="font-mono text-mint font-bold">02 /</span> Scan the laser-debossed base QR code using our web app to link the cup to your account.
             </div>
             <div className="flex gap-3 text-xs leading-relaxed">
-              {/* TODO: confirm with founder */}
-              <span className="font-mono text-mint font-bold">03 /</span> Enjoy your warm drink in a fluted, non-toxic husk composite cup with zero plastic lining.
+              <span className="font-mono text-mint font-bold">03 /</span> Enjoy your warm or cold drink in a fluted, non-toxic husk composite cup with zero plastic lining.
             </div>
             <div className="flex gap-3 text-xs leading-relaxed">
-              {/* TODO: confirm with founder */}
-              <span className="font-mono text-mint font-bold">04 /</span> Drop your empty cup in any smart collection bin across the network to refund your deposit.
+              <span className="font-mono text-mint font-bold">04 /</span> Drop your empty cup at any partnered café return counter across the network to refund your deposit.
             </div>
           </div>
 

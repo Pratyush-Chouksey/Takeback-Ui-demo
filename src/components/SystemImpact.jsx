@@ -251,8 +251,7 @@ export function SystemImpact() {
               Closing the Loop
             </h3>
             <p className="interface-text text-sm text-[#F7F5F0]/60 leading-relaxed">
-              {/* TODO: replace with real live data */}
-              In our latest annual reporting period, TakeBack has successfully scaled its circular sharing loop to redirect massive volumes of single-use cups from landfills. Our warm, community-driven network has diverted over 1.4 million items and offset significant metric tons of carbon emission footprint, verifying that systemic reuse is the fastest path to circularity.
+              In our latest annual reporting period, TakeBack has successfully scaled its circular sharing loop to redirect massive volumes of single-use cups from landfills. Our warm, community-driven network has diverted over 10,000+ items and offset significant metric tons of carbon emission footprint, verifying that systemic reuse is the fastest path to circularity.
             </p>
           </div>
           
@@ -260,8 +259,7 @@ export function SystemImpact() {
             <div className="p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-2">
               <span className="text-[10px] font-mono text-white/45 uppercase">ACTIVE PARTNER CAFÉS</span>
               <span className="text-3xl font-black font-mono text-mint">
-                {/* TODO: replace with real live data */}
-                500+ Cafés
+                142 Partner Cafés
               </span>
               <p className="text-xs text-white/50 leading-relaxed">
                 Active cafes and roasting partners participating in the cup sharing network nationwide.

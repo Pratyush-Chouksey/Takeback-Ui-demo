@@ -125,7 +125,7 @@ body {
   
   
   /* Touch target height guarantees (WCAG 2.2 AA target size >= 48px) */
-  button,
+  button:not(.nav-link),
   select,
   input[type="text"],
   input[type="email"],
@@ -135,6 +135,16 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Exclude menu links and filter buttons from display centering and height overrides */
+  button.nav-link {
+    min-height: unset !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
   }
 
   /* Slider touch target */

@@ -33,7 +33,7 @@ export function About() {
             OUR STORY SO FAR.
           </h1>
           <p className="interface-text text-lg text-[#0B0F12]/70 font-semibold italic border-l-4 border-[#A3E2C9] pl-4 py-1 leading-relaxed">
-            Eliminating single-use coffee cups across India through a community-powered share loop.
+            Eliminating single-use cups across India through a community-powered share loop.
           </p>
         </div>
 
@@ -84,11 +84,11 @@ export function About() {
           
           <div className="interface-text text-base md:text-[17px] text-[#0B0F12]/80 leading-[1.60] space-y-6">
             <p>
-              It all started on a crisp morning at my local beach in Goa back in 2024. I was sitting on the sand, watching the surf roll in, cradling my morning flat white. It’s a ritual that millions of us share—a moment of quiet pause before the day begins, fueled by the rich, comforting warmth of a good brew. But as the sun climbed higher, I noticed something else dotting the shoreline. Tucked into the rocks and half-buried in the sand were paper takeaway cups. Dozens of them. That morning, the magic of my daily ritual was broken by a stark reality: our love for coffee was leaving a devastating mark on the places we cherish most.
+              It all started on a crisp morning at my local beach in Goa back in 2024. I was sitting on the sand, watching the surf roll in, cradling my morning flat white or tea. It’s a ritual that millions of us share—a moment of quiet pause before the day begins, fueled by the rich, comforting warmth of a good brew. But as the sun climbed higher, I noticed something else dotting the shoreline. Tucked into the rocks and half-buried in the sand were paper takeaway cups. Dozens of them. That morning, the magic of my daily ritual was broken by a stark reality: our love for daily drinks was leaving a devastating mark on the places we cherish most.
             </p>
             
             <p>
-              When I looked into the numbers, the scale of the issue blew me away. In India alone, we go through over one billion single-use coffee cups every single year. Most people believe these cups are harmlessly composted or recycled, but the reality is far more challenging. Almost all takeaway cups are lined with a thin, heat-bonded polyethylene plastic film to keep them waterproof. Because of this laminate, they cannot be recycled through standard facilities, meaning nearly every single cup ended up in a landfill or scattered across our coastlines and bushlands.
+              When I looked into the numbers, the scale of the issue blew me away. In India alone, we go through over one billion single-use cups every single year. Most people believe these cups are harmlessly composted or recycled, but the reality is far more challenging. Almost all takeaway cups are lined with a thin, heat-bonded polyethylene plastic film to keep them waterproof. Because of this laminate, they cannot be recycled through standard facilities, meaning nearly every single cup ended up in a landfill or scattered across our coastlines and bushlands.
             </p>
             
             <p className="border-l-2 border-[#0B0F12] pl-6 py-2 my-8 font-serif text-xl md:text-2xl font-semibold italic text-[#0B0F12]/90">
@@ -96,19 +96,19 @@ export function About() {
             </p>
 
             <p>
-              I knew we couldn't go on like this, but I also knew that asking everyone to carry reusable cups everywhere wasn't working. Life gets busy, we forget our flasks in the car, or we decide on a coffee spur of the moment. We didn't need to change people's love for coffee; we needed to change the system around it. That’s how the idea for TakeBack was born. I wanted to build a simple, circular network where a reusable cup could be borrowed at one cafe and returned at any other, making reuse the absolute easiest choice for every Indian.
+              I knew we couldn't go on like this, but I also knew that asking everyone to carry reusable cups everywhere wasn't working. Life gets busy, we forget our flasks in the car, or we decide on a drink spur of the moment. We didn't need to change people's love for daily drinks; we needed to change the system around it. That’s how the idea for TakeBack was born. I wanted to build a simple, circular network where a reusable cup could be borrowed at one cafe and returned at any other, making reuse the absolute easiest choice for every Indian.
             </p>
             
             <p>
-              We gathered a passionate team of local designers, material scientists, and cafe owners. We spent months sketching, testing, and refining. We wanted a cup that felt amazing to hold, insulated the coffee beautifully, and stood up to the rigors of daily commercial washing. The result was our signature husk vessel—crafted from upcycled coffee husks that would otherwise go to waste, combined with food-grade circular poly-composites. It is beautiful, durable, and designed to circulate for thousands of wash cycles.
+              We gathered a passionate team of local designers, material scientists, and cafe owners. We spent months sketching, testing, and refining. We wanted a cup that felt amazing to hold, insulated the drinks beautifully, and stood up to the rigors of daily washing. The result was our signature husk vessel—crafted from upcycled coffee husks that would otherwise go to waste, combined with food-grade circular poly-composites. It is beautiful, durable, and designed to circulate for 150 washes.
             </p>
             
             <p>
-              But a great cup is only half the loop. We engineered a seamless, connected system of smart return bins and cafe drop points. By placing these return drawers at neighborhood cafes, campus hubs, and transit stations, we’ve created a frictionless network. A quick scan of the base QR code registers your cup, and returning it takes just seconds, rewarding you with ₹15 cashback directly to your wallet. It's a self-sustaining ecosystem built on community, trust, and shared responsibility.
+              But a great cup is only half the loop. We engineered a seamless, connected system of partnered café drop points. By placing these return counters at neighborhood cafes, campus hubs, and transit stations, we’ve created a frictionless network. A quick scan of the base QR code registers your cup, and returning it takes just seconds, rewarding you with ₹15 cashback directly to your wallet. It's a self-sustaining ecosystem built on community, trust, and shared responsibility.
             </p>
             
             <p>
-              From our humble beginnings in a single coastal cafe, TakeBack has grown into a thriving network of over 140 nodes across India's capital cities and regional hubs. We’re incredibly proud to partner with legendary roasters and local cafes who share our vision of a clean, circular future. For us, TakeBack isn’t about compromising on convenience or guilt-tripping coffee drinkers; it's about celebrating our incredible coffee culture while keeping India’s beautiful landscapes clean for generations to come. Every cup borrowed is one less cup binned, and together, we are closing the loop on waste.
+              From our humble beginnings in a single coastal cafe, TakeBack has grown into a thriving network of over 140 nodes across India's capital cities and regional hubs. We’re incredibly proud to partner with legendary roasters and local cafes who share our vision of a clean, circular future. For us, TakeBack isn’t about compromising on convenience or guilt-tripping drinkers; it's about celebrating our incredible beverage culture while keeping India’s beautiful landscapes clean for generations to come. Every cup borrowed is one less cup binned, and together, we are closing the loop on waste.
             </p>
 
             <p className="border-t border-black/10 pt-6 mt-6 text-sm text-[#0B0F12]/75">
@@ -152,11 +152,11 @@ export function About() {
               {[
                 {
                   q: "How does the TakeBack borrow and return system work?",
-                  a: "Order your drink at any partner café in a TakeBack cup. Scan the base QR code to borrow it. Enjoy your coffee on the go, then drop the cup in any network smart bin. Your deposit is instantly refunded to your digital wallet."
+                  a: "Order your drink at any partnered café in a TakeBack cup. Scan the base QR code to borrow it. Enjoy your drink on the go, then drop the cup at any partnered café return counter. Your deposit is instantly refunded to your digital wallet."
                 },
                 {
                   q: "Is there a cost or deposit required to borrow a cup?",
-                  a: "Yes. We hold a fully refundable deposit of ₹50.00 per cup to keep the loop sustainable. Once you return the cup to any smart bin drop node, the deposit is instantly credited back to your linked payment method."
+                  a: "Yes. We hold a fully refundable deposit of ₹50.00 per cup to keep the loop sustainable. Once you return the cup to any partnered café return counter, the deposit is instantly credited back to your linked payment method."
                 },
                 {
                   q: "How are TakeBack cups sanitized between borrows?",
@@ -164,15 +164,15 @@ export function About() {
                 },
                 {
                   q: "What materials are the cups made from?",
-                  a: "The cups are crafted from organic upcycled coffee husks blended with food-grade circular poly-composites. They are 100% BPA-free, certified non-toxic, and built to withstand over 10,000 commercial wash cycles without any structural degradation."
+                  a: "The cups are crafted from organic upcycled coffee husks blended with food-grade circular poly-composites. They are 100% BPA-free, certified non-toxic, and built to withstand 150 commercial wash cycles without any structural degradation."
                 },
                 {
                   q: "Where can I return my borrowed TakeBack cup?",
-                  a: "You can drop it at any smart return bin node or participating café in our network. Open the live map in our app to locate return stations and partner cafés near you."
+                  a: "You can drop it at any partnered café return counter in our network. Open the live map in our app to locate return stations and partnered cafés near you."
                 },
                 {
                   q: "What happens to a cup when it reaches its end of life?",
-                  a: "Once a cup completes its lifespan of 10,000 washes, we don't throw it away. We gather them for circular recycling, grinding the material down to manufacture new smart collection bins and return nodes."
+                  a: "Once a cup completes its lifespan of 150 washes, we don't throw it away. We gather them for circular recycling, grinding the material down to manufacture new collection counters and return nodes."
                 }
               ].map((faq, i) => (
                 <div key={i} className="p-5 bg-white/50 border border-black/5 rounded-xl flex flex-col gap-2 text-left">
