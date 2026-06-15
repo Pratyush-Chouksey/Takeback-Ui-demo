@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import staticCup from '../assets/takeback-cup-static.png';
+import staticCup from '../assets/product_lifestyle.png';
 import MagneticButton from './MagneticButton';
 
 export function PWADemo() {
@@ -143,8 +143,8 @@ export function PWADemo() {
               {/* Mock Camera Viewfinder window */}
               <div className="relative flex-1 w-full bg-black/40 border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden my-4">
                 
-                {/* Mobile Fallback: Show static cup in mock camera */}
-                <div className="md:hidden absolute inset-0 flex items-center justify-center p-8 bg-black/20">
+                {/* Camera Viewfinder static cup image */}
+                <div className="absolute inset-0 flex items-center justify-center p-8 bg-black/20">
                   <img 
                     src={staticCup} 
                     alt="Takeback smart cup camera simulator" 

@@ -55,10 +55,12 @@ export function SystemLoop() {
   const cards = [
     {
       index: '01',
-      step: 'STEP 01: BORROW',
-      description: 'Locate a partner store near you. Scan the smart cup QR code to validate your borrow token, authorise deposit lock, and release the unit.',
+      step: 'Step 01: Borrow (Scan Base QR Code)',
+      // TODO: confirm with founder
+      description: "Scan the cup's QR code at any partner café to instantly check it out.",
       feature: (
         <div className="mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col items-center gap-3">
+          {/* How It Works Icon 1: QR scan icon (assets/icon_qr_scan.png) */}
           <div className="w-20 h-20 bg-black/10 border border-dashed border-black/30 rounded flex items-center justify-center relative overflow-hidden">
             {/* Visual QR Simulator */}
             <div className="absolute inset-2 border-2 border-black/50 rounded flex flex-wrap p-1">
@@ -80,37 +82,42 @@ export function SystemLoop() {
     },
     {
       index: '02',
-      step: 'STEP 02: USE',
-      description: 'Consume your hot or cold beverage. Our high-fidelity double-wall vacuum insulated smart container preserves temperature for up to 4 hours.',
+      step: 'Step 02: Use (Insulated Husk Vessel)',
+      // TODO: confirm with founder
+      description: "Enjoy your hot or cold coffee in our insulated husk composite vessel.",
       feature: (
         <div className="mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col gap-2 font-mono text-xs">
+          {/* How It Works Icon 2: Cup icon (assets/icon_cup.png) */}
+          {/* How It Works Icon 3: Café icon (assets/icon_cafe.png) */}
           <div className="flex justify-between border-b border-black/10 pb-1.5">
             <span className="text-black/50">MATERIAL:</span>
-            <span className="font-semibold text-black/95">Vacuum Steel Grade</span>
+            <span className="font-semibold text-black/95">Coffee Husk Composite</span>
           </div>
           <div className="flex justify-between border-b border-black/10 pb-1.5">
             <span className="text-black/50">THERMAL CAP:</span>
             <span className="font-semibold text-black/95">4 Hours Hot / Cold</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-black/50">CAPACITY:</span>
-            <span className="font-semibold text-black/95">350 ML (Standard)</span>
+            <span className="text-black/50">INSULATION:</span>
+            <span className="font-semibold text-black/95">Fluted Heat Ridges</span>
           </div>
         </div>
       )
     },
     {
       index: '03',
-      step: 'STEP 03: RETURN',
-      description: 'Deposit the cup at any network smart bin. Scan the bin tag to scan the cup home, instantly unlocking and settling your UPI cash-back refund.',
+      step: 'Step 03: Return (Drop Bin Node & Earn ₹15 Cashback)',
+      // TODO: confirm with founder
+      description: "Drop the cup in a smart bin to get your cashback refund instantly.",
       feature: (
         <div className="mt-6 p-4 rounded-lg bg-[#A3E2C9]/10 border border-[#A3E2C9]/40 flex flex-col items-center gap-2">
+          {/* How It Works Icon 4: Cashback coin icon (assets/icon_cashback_coin.png) */}
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-mint shadow-[0_0_8px_rgba(163,226,201,0.5)] animate-pulse" />
-            <span className="text-sm font-bold text-black font-sans">Refund Confirmed</span>
+            <span className="text-sm font-bold text-black font-sans">Cashback Earned</span>
           </div>
           <div className="text-xl font-bold font-mono text-[#1A2E22] technical-figures">
-            + ₹ 50.00
+            + ₹15
           </div>
           <span className="text-[9px] font-mono text-black/60 uppercase">
             [ INSTANT UPI CREDITED ]
@@ -124,7 +131,7 @@ export function SystemLoop() {
     <section 
       ref={containerRef}
       id="system-loop-section"
-      className="relative w-full overflow-hidden bg-[#F4F3EF] text-[#0B0F12] border-t border-black/5"
+      className="relative min-h-screen md:h-screen flex flex-col justify-between overflow-hidden bg-[#F4F3EF] text-[#0B0F12] border-t border-black/5"
     >
       {/* Persistent Horizontal Progress Track Vector Line - Desktop Only */}
       <div className="absolute top-44 left-[15%] right-[15%] h-0.5 bg-black/10 z-10 hidden md:block rounded-full">
@@ -155,7 +162,7 @@ export function SystemLoop() {
       */}
       <div 
         ref={trackRef}
-        className="flex flex-col md:flex-row flex-nowrap md:w-[300vw] h-auto md:h-[calc(100vh-160px)] items-stretch md:items-center relative"
+        className="flex flex-col md:flex-row flex-nowrap md:w-[300vw] h-auto md:flex-1 items-stretch md:items-center relative"
       >
         {cards.map((card, idx) => (
           <div 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import staticCup from '../assets/takeback-cup-static.png';
+import staticCup from '../assets/product_lifestyle.png';
 import MagneticButton from './MagneticButton';
 
 export function Borrow({ triggerReward }) {
@@ -63,10 +63,31 @@ export function Borrow({ triggerReward }) {
           </div>
 
           <p className="interface-text text-sm md:text-base text-white/70 leading-[1.60] max-w-md">
-            Scan the laser QR code on the lower base band of any smart cup. A refundable deposit of ₹50 will be locked via UPI and settled instantly upon return.
+            Scan the laser QR code on the lower base band of any smart cup. A refundable deposit of ₹50.00 will be locked and settled instantly upon return.
           </p>
 
-          <div className="space-y-3 font-mono text-xs max-w-sm border-t border-white/10 pt-4">
+          {/* Borrow/Return 4-step isometric flow illustration stub: assets/isometric_flow.png */}
+          {/* 4-Step Borrow/Return Process List */}
+          <div className="flex flex-col gap-3.5 my-6 border-t border-b border-white/10 py-5 max-w-md">
+            <div className="flex gap-3 text-xs leading-relaxed">
+              {/* TODO: confirm with founder */}
+              <span className="font-mono text-mint font-bold">01 /</span> Find an active partner café on our live map to grab a fresh circular coffee vessel.
+            </div>
+            <div className="flex gap-3 text-xs leading-relaxed">
+              {/* TODO: confirm with founder */}
+              <span className="font-mono text-mint font-bold">02 /</span> Scan the laser-debossed base QR code using our web app to link the cup to your account.
+            </div>
+            <div className="flex gap-3 text-xs leading-relaxed">
+              {/* TODO: confirm with founder */}
+              <span className="font-mono text-mint font-bold">03 /</span> Enjoy your warm drink in a fluted, non-toxic husk composite cup with zero plastic lining.
+            </div>
+            <div className="flex gap-3 text-xs leading-relaxed">
+              {/* TODO: confirm with founder */}
+              <span className="font-mono text-mint font-bold">04 /</span> Drop your empty cup in any smart collection bin across the network to refund your deposit.
+            </div>
+          </div>
+
+          <div className="space-y-3 font-mono text-xs max-w-sm">
             <div className="flex justify-between">
               <span className="text-white/40">REFUNDABLE DEPOSIT:</span>
               <span className="text-mint font-bold">₹50.00</span>
@@ -126,8 +147,8 @@ export function Borrow({ triggerReward }) {
                     id="pwa-camera-viewport"
                     className="relative flex-1 w-full bg-black/60 border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden"
                   >
-                    {/* Mobile Fallback: Show static cup in scanner */}
-                    <div className="md:hidden absolute inset-0 flex items-center justify-center p-8 bg-black/20">
+                    {/* Viewfinder static cup image */}
+                    <div className="absolute inset-0 flex items-center justify-center p-8 bg-black/20">
                       <img 
                         src={staticCup} 
                         alt="Takeback smart cup scanning preview" 
@@ -145,9 +166,9 @@ export function Borrow({ triggerReward }) {
                       </svg>
                     </div>
                   </div>
-                  <div className="text-center font-mono text-[10px] text-mint uppercase tracking-wider mt-4">
-                    [ targeting base matrix QR code... ]
-                  </div>
+                  <div className="text-[10px] text-center font-mono text-white/40 uppercase tracking-widest mt-1 select-none">
+                  [ Account linked: Pratyush@bank ]
+                </div>
                 </div>
               )}
 
@@ -156,7 +177,7 @@ export function Borrow({ triggerReward }) {
                   <div className="flex flex-col gap-2">
                     <span className="text-[10px] font-mono text-white/50 uppercase">// secure gateway check</span>
                     <h3 className="display-header text-sm font-bold text-light-cream uppercase tracking-wide">
-                      UPI Deposit Authorization
+                      Loop Deposit Authorization
                     </h3>
                   </div>
 
@@ -178,9 +199,9 @@ export function Borrow({ triggerReward }) {
                   <div className="flex flex-col gap-2">
                     <button
                       onClick={handleUPIConfirm}
-                      className="w-full py-3 bg-mint hover:bg-mint/90 text-deep-ink font-bold rounded-xl text-xs uppercase tracking-wider font-sans focus-visible:outline-none spring-transition"
+                      className="w-full py-3 bg-mint hover:bg-mint/90 text-deep-ink font-bold rounded-xl text-xs uppercase tracking-wider font-sans focus-visible:outline-none spring-transition border-none cursor-pointer"
                     >
-                      Authorize One-Tap UPI
+                      Authorize One-Tap Deposit
                     </button>
                     <button
                       onClick={resetScan}
@@ -201,7 +222,7 @@ export function Borrow({ triggerReward }) {
                     Borrow Verified
                   </h3>
                   <p className="interface-text text-xs text-white/60 px-4">
-                    UPI Escrow locked successfully. You are now inside the loop. Drink responsibly!
+                    Deposit pre-authorized successfully. You are now inside the loop. Drink responsibly!
                   </p>
                 </div>
               )}

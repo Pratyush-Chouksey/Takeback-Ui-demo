@@ -1,17 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import staticCup from '../assets/takeback-cup-static.png';
+import productLifestyle from '../assets/product_lifestyle.png';
+import heroBackground from '../assets/hero_background.png';
 import MagneticButton from './MagneticButton';
 
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-export function Hero() {
+export function Hero({ setRoute }) {
   const containerRef = useRef(null);
 
   // Split-text logic for staggered reveal
-  const titleText = "TAKE BACK THE CUP.";
+  const titleText = "EVERY CUP BORROWED, ONE LESS CUP BINNED.";
   const chars = titleText.split("").map((char, index) => (
     <span key={index} className="inline-block overflow-hidden py-1">
       <span 
@@ -76,6 +77,15 @@ export function Hero() {
       id="hero-section"
       className="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-[#0B0F12]"
     >
+      {/* Hero background image */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none opacity-40">
+        <img 
+          src={heroBackground} 
+          alt="Matte reusable coffee cup on café table in morning light" 
+          className="w-full h-full object-cover" 
+        />
+      </div>
+
       {/* Content Container (z-100) */}
       <div className="relative z-[100] layout-grid text-center flex flex-col items-center gap-6">
         <div className="col-span-4 lg:col-span-12 flex flex-col items-center gap-4 max-w-4xl mx-auto">
@@ -92,30 +102,38 @@ export function Hero() {
 
           {/* Hero Subtext */}
           <p className="hero-fade-in interface-text text-base md:text-lg text-light-cream/90 max-w-xl text-center leading-[1.60] mt-2">
-            Takeback is building a fluid circular borrow-and-deposit network. Swap your single-use waste for high-fidelity smart containers and save the loop.
+            A simple, community-powered share loop designed to keep India's coffee culture clean, one delicious brew at a time.
           </p>
 
           {/* Multi-button action layout */}
           <div className="hero-fade-in flex flex-col sm:flex-row gap-4 mt-6">
             <MagneticButton 
-              className="px-8 py-3.5 bg-mint hover:bg-mint/95 text-deep-ink font-semibold rounded-lg text-sm tracking-wider uppercase font-sans focus-visible:outline-none"
-              onClick={() => alert("Scroller navigation initiated")}
+              className="px-8 py-3.5 bg-mint hover:bg-mint/95 text-deep-ink font-semibold rounded-lg text-sm tracking-wider uppercase font-sans focus-visible:outline-none border-none cursor-pointer"
+              onClick={() => {
+                // TODO: confirm with founder
+                if (setRoute) setRoute('/shop');
+                else alert("Redirecting to shop...");
+              }}
             >
-              Start Borrowing
+              Shop Cups
             </MagneticButton>
             <MagneticButton 
-              className="px-8 py-3.5 bg-white/5 hover:bg-white/10 text-light-cream border border-white/10 font-semibold rounded-lg text-sm tracking-wider uppercase font-sans focus-visible:outline-none"
-              onClick={() => alert("Redirecting to Live Impact data...")}
+              className="px-8 py-3.5 bg-white/5 hover:bg-white/10 text-light-cream border border-white/10 font-semibold rounded-lg text-sm tracking-wider uppercase font-sans focus-visible:outline-none cursor-pointer"
+              onClick={() => {
+                // TODO: confirm with founder
+                if (setRoute) setRoute('/for-cafes');
+                else alert("Redirecting to cafes portal...");
+              }}
             >
-              Explore Live Impact
+              For Cafes
             </MagneticButton>
           </div>
 
-          {/* Mobile landing cup image mockup fallback */}
-          <div className="md:hidden mt-8 w-60 h-60 flex items-center justify-center pointer-events-none select-none">
+          {/* Landing cup image mockup fallback */}
+          <div className="mt-8 w-60 h-60 md:w-80 md:h-80 flex items-center justify-center pointer-events-none select-none">
             <img 
-              src={staticCup} 
-              alt="Takeback smart coffee cup mockup" 
+              src={productLifestyle} 
+              alt="Takeback smart coffee cup mockup walking through city market" 
               className="w-full h-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.35)] animate-pulse"
               style={{ animationDuration: '4s' }}
             />

@@ -1,6 +1,19 @@
 import React from 'react';
-import staticCup from '../assets/takeback-cup-static.png';
 import MagneticButton from './MagneticButton';
+
+// Import color variant images
+import forestCup from '../assets/product_card_forest.png';
+import terracottaCup from '../assets/product_card_terracotta.png';
+import boneCup from '../assets/product_card_bone.png';
+import midnightCup from '../assets/product_card_midnight.png';
+
+const cupImages = {
+  Forest: forestCup,
+  Terracotta: terracottaCup,
+  Bone: boneCup,
+  Midnight: midnightCup
+};
+
 
 export function Shop({ activeVariant, onColorwayChange }) {
   const products = [
@@ -128,7 +141,7 @@ export function Shop({ activeVariant, onColorwayChange }) {
               <h2 className="display-header text-2xl font-black text-[#0B0F12]">SHADING PREVIEW</h2>
             </div>
             <p className="interface-text text-xs text-black/70 leading-relaxed">
-              Hover over the spatial container on the screen to pivot the 3D model orientation angle. Select variant swatches below to customize material shader configurations.
+              Select variant swatches below to customize material shader configurations and preview your smart cup colorway.
             </p>
 
             <div className="flex flex-col gap-2.5 mt-2">
@@ -164,15 +177,12 @@ export function Shop({ activeVariant, onColorwayChange }) {
           </div>
 
           {/* Canvas targeting viewfinder */}
-          <div className="h-[220px] rounded-xl border border-dashed border-black/10 flex items-center justify-center relative bg-black/5 overflow-hidden">
-            <span className="text-[9px] font-mono text-black/40 uppercase pointer-events-none select-none hidden md:block">// custom shader context area</span>
-            <div className="md:hidden absolute inset-0 flex items-center justify-center p-3">
-              <img 
-                src={staticCup} 
-                alt="Takeback smart cup variant preview" 
-                className="w-full h-full object-contain filter drop-shadow-md"
-              />
-            </div>
+          <div className="h-[220px] rounded-xl bg-black/5 border border-black/5 flex items-center justify-center relative overflow-hidden p-3">
+            <img 
+              src={cupImages[activeVariant.name] || forestCup} 
+              alt={`Takeback smart cup variant preview in ${activeVariant.name}`} 
+              className="w-full h-full object-contain filter drop-shadow-md transition-all duration-500"
+            />
           </div>
 
         </div>

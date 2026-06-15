@@ -1,5 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import staticCup from '../assets/takeback-cup-static.png';
+
+// Import color variant images
+import forestCup from '../assets/product_card_forest.png';
+import terracottaCup from '../assets/product_card_terracotta.png';
+import boneCup from '../assets/product_card_bone.png';
+import midnightCup from '../assets/product_card_midnight.png';
+
+const cupImages = {
+  Forest: forestCup,
+  Terracotta: terracottaCup,
+  Bone: boneCup,
+  Midnight: midnightCup
+};
 
 export function ProductConfigurator({ activeVariant, onColorwayChange }) {
   const containerRef = useRef(null);
@@ -11,33 +23,7 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
     { name: 'Midnight', hex: '#14191C', stroke: 'rgba(20, 25, 28, 0.45)', fill: 'rgba(20, 25, 28, 0.08)' }
   ];
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const relativeX = (e.clientX - centerX) / (rect.width / 2);
-      const relativeY = (e.clientY - centerY) / (rect.height / 2);
-      
-      // Dispatch custom event to communicate mouse offsets to the global canvas controller
-      const event = new CustomEvent('configurator-mouse', {
-        detail: { x: relativeX, y: relativeY }
-      });
-      window.dispatchEvent(event);
-    };
 
-    const element = containerRef.current;
-    if (element) {
-      element.addEventListener('mousemove', handleMouseMove);
-    }
-
-    return () => {
-      if (element) {
-        element.removeEventListener('mousemove', handleMouseMove);
-      }
-    };
-  }, []);
 
   const specs = [
     { label: 'Thermal Shield', val: 'Double-wall structural lock' },
@@ -52,33 +38,16 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
     >
       <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
         
-        {/* Left Viewport Panel: Bounding box targeting the global canvas rendering coordinates */}
+        {/* Left Viewport Panel: Display the selected color variant image directly */}
         <div 
-          ref={containerRef}
           id="configurator-viewport"
-          className="relative w-full h-[350px] md:h-[550px] rounded-2xl bg-white/40 border border-black/5 flex items-center justify-center overflow-hidden cursor-crosshair group shadow-inner"
+          className="relative w-full h-[350px] md:h-[550px] rounded-2xl bg-white/40 border border-black/5 flex items-center justify-center overflow-hidden shadow-inner p-6"
         >
-          {/* Interactive instruction HUD (hidden on mobile) */}
-          <div className="absolute top-4 left-4 z-10 flex flex-col gap-1 pointer-events-none select-none hidden md:flex">
-            <span className="text-[10px] font-mono tracking-wider text-black/50 uppercase">
-              // interactive spatial mesh
-            </span>
-            <span className="text-xs font-bold font-mono text-black/80">
-              Hover to Pivot Angle
-            </span>
-          </div>
-
-          {/* Mobile Fallback static card */}
-          <div className="md:hidden absolute inset-0 flex items-center justify-center p-6 bg-white/10">
-            <img 
-              src={staticCup} 
-              alt="Takeback specialty coffee cup mockup" 
-              className="w-full h-full object-contain filter drop-shadow-xl"
-            />
-          </div>
-
-          {/* Empty fallback overlay */}
-          <div className="absolute inset-0 z-[2999] pointer-events-none border-2 border-dashed border-black/5 rounded-xl m-2 hidden md:block" />
+          <img 
+            src={cupImages[activeVariant.name] || forestCup} 
+            alt={`Takeback specialty coffee cup mockup in ${activeVariant.name} colorway`} 
+            className="w-full h-full object-contain filter drop-shadow-xl transition-all duration-500"
+          />
         </div>
 
         {/* Right Viewport Configurator Panel: Specifications Column */}

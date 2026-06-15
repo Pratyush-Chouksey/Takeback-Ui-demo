@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MagneticButton from './MagneticButton';
 
 export function B2BPortal() {
   // ROI state values
   const [dailyVolume, setDailyVolume] = useState(300);
   const [paperCupCost, setPaperCupCost] = useState(8); // average cost in ₹ per cup
+  const [isSavingsScaling, setIsSavingsScaling] = useState(false);
 
   // Partnership intake sheet state
   const [formData, setFormData] = useState({
-    cafeName: '',
+    contactName: '',
+    brandTitle: '',
+    city: 'Bangalore',
     outlets: '1',
-    city: 'Mumbai',
     contactEmail: '',
     acceptedTerms: false
   });
@@ -23,8 +25,17 @@ export function B2BPortal() {
   // Takeback model: subscription/service fee is roughly ₹1.80 per cycle wash/borrow
   const takebackServiceFee = 1.8;
   const annualTakebackExpense = annualSingleUseCount * takebackServiceFee;
-  const annualSavings = annualPaperCupExpense - annualTakebackExpense;
+  const annualSavings = Math.max(0, annualPaperCupExpense - annualTakebackExpense);
   const plasticWasteDivertedKg = Math.round(annualSingleUseCount * 0.015); // ~15g per cup/lid
+
+  // Trigger savings text scale morph animation
+  useEffect(() => {
+    setIsSavingsScaling(true);
+    const timer = setTimeout(() => {
+      setIsSavingsScaling(false);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [annualSavings]);
 
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,118 +55,227 @@ export function B2BPortal() {
     setTimeout(() => {
       setSubmitted(false);
       setFormData({
-        cafeName: '',
+        contactName: '',
+        brandTitle: '',
+        city: 'Bangalore',
         outlets: '1',
-        city: 'Mumbai',
         contactEmail: '',
         acceptedTerms: false
       });
     }, 4000);
   };
 
+  const partners = [
+    {
+      name: 'Third Wave Coffee Co.',
+      nodes: '14 Urban Hub Nodes',
+      region: 'Bengaluru Core',
+      accent: 'border-mint/20'
+    },
+    {
+      name: 'Blue Tokai Coffee Roasters',
+      nodes: '22 Metro Nodes',
+      region: 'Mumbai/Delhi Capital Region',
+      accent: 'border-gold-amber/20'
+    },
+    {
+      name: 'Subko Coffee Roasters',
+      nodes: '6 Specialty Nodes',
+      region: 'Bandra/Colaba Districts',
+      accent: 'border-white/10'
+    },
+    {
+      name: 'Araku Coffee',
+      nodes: '2 flagship Heritage Nodes',
+      region: 'Indiranagar Hub',
+      accent: 'border-mint/20'
+    }
+  ];
+
   return (
     <section 
       id="b2b-portal-section"
-      className="min-h-screen w-full bg-[#F7F5F0] text-[#0B0F12] pt-28 pb-16 flex items-center justify-center"
+      className="min-h-screen w-full bg-[#0B0F12] text-[#F7F5F0] pt-28 pb-16 flex items-center justify-center spring-transition"
     >
       <div className="max-w-[1440px] mx-auto w-full px-5 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         
-        {/* Left 6 Columns: B2B ROI Calculator Workspace */}
+        {/* Row 1: Brand story header & registry data (Full width) */}
+        {/* B2B Hero Image Stub: assets/b2b_hero.png (barista handing cup, TakeBack branding visible) */}
+        {/* Starter Kit Flat-Lay Image Stub: assets/starter_kit.png (cups, menu card, signage on marble) */}
+        <div className="col-span-1 lg:col-span-12 flex flex-col gap-8 border-b border-white/10 pb-8">
+          <div className="flex flex-col lg:flex-row gap-8 justify-between items-start">
+            <div className="flex flex-col gap-2 max-w-xl">
+              <span className="text-xs font-mono tracking-[0.2em] text-[#A3E2C9] uppercase font-bold">
+                B2B PARTNER NETWORK HUB
+              </span>
+              <h1 className="display-header text-4xl md:text-5xl font-black text-[#F7F5F0] leading-none uppercase">
+                Operational Realization
+              </h1>
+              <p className="interface-text text-sm text-[#F7F5F0]/65 mt-2">
+                Optimize procurement budgets and integrate your cafes into India's largest smart-sharing borrow-and-return system.
+              </p>
+            </div>
+            
+            {/* Café Owner Benefits */}
+            <div className="flex flex-col gap-4 max-w-xl w-full bg-white/5 border border-white/10 p-6 rounded-2xl">
+              <span className="text-[10px] font-mono tracking-widest text-[#A3E2C9] uppercase font-bold block">
+                PARTNER CAFÉ BENEFITS
+              </span>
+              <ul className="flex flex-col gap-3 text-xs leading-relaxed text-[#F7F5F0]/85 font-sans">
+                <li className="flex gap-2 items-start">
+                  {/* TODO: confirm with founder */}
+                  <span className="text-mint font-bold">✓</span>
+                  <span><strong>Cost Reduction:</strong> Phase out disposable cup spending. Pay only a low service fee per borrow/wash cycle, saving up to 40% annually on packaging budgets.</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  {/* TODO: confirm with founder */}
+                  <span className="text-mint font-bold">✓</span>
+                  <span><strong>Premium Branding:</strong> Custom-deboss your café logo onto beautiful fluted husk cups, aligning your brand with modern circular design.</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  {/* TODO: confirm with founder */}
+                  <span className="text-mint font-bold">✓</span>
+                  <span><strong>Seamless Sustainability:</strong> Divert waste without operational friction. We manage automated bin collection, high-temperature sanitation, and restocking.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Registry Social Proof Matrix */}
+          <div className="flex flex-col gap-4 mt-2">
+            <span className="text-[10px] font-mono tracking-widest text-[#F7F5F0]/40 uppercase font-semibold">
+              ACTIVE NETWORK REGISTRY
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {partners.map((partner, idx) => (
+                <div 
+                  key={idx} 
+                  className={`glass-panel p-5 rounded-xl border ${partner.accent} hover:bg-white/5 transition-all duration-300`}
+                >
+                  <span className="text-[10px] font-mono text-[#A3E2C9] font-bold uppercase tracking-wider block">
+                    {partner.nodes}
+                  </span>
+                  <h3 className="display-header text-base font-bold text-[#F7F5F0] mt-1.5 leading-snug">
+                    {partner.name}
+                  </h3>
+                  <span className="text-xs text-[#F7F5F0]/50 font-mono block mt-1">
+                    {partner.region}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2, Left 7 Columns: B2B ROI Calculator Workspace */}
         <div className="col-span-1 lg:col-span-7 flex flex-col gap-8">
           
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-mono tracking-[0.2em] text-[#1a2e22]/80 uppercase font-bold">
+            <span className="text-xs font-mono tracking-[0.2em] text-[#A3E2C9]/80 uppercase font-bold">
               CHAPTER 6 // OPERATOR INTEGRATION
             </span>
-            <h1 className="display-header text-4xl md:text-5xl font-black text-[#0B0F12] leading-none uppercase">
+            <h2 className="display-header text-2xl md:text-3xl font-black text-[#F7F5F0] leading-none uppercase">
               CAFÉ ROI CALCULATOR
-            </h1>
-            <p className="interface-text text-sm text-black/60 mt-2">
-              Calculate packaging cost reductions by phasing out single-use paper cups and lids in favor of the Takeback smart-sharing loop network.
+            </h2>
+            {/* TODO: confirm with founder */}
+            <p className="interface-text text-xs text-[#F7F5F0]/60 mt-1">
+              Calculate your direct environmental and financial impact. Enter your café's daily coffee volume and current single-use packaging unit costs to determine your projected annual savings. By shifting from traditional disposable cups and plastic lids to our shared loop, you replace high procurement expenses with a low, predictable flat-rate washing cycle fee.
             </p>
           </div>
 
-          <div className="p-6 md:p-8 rounded-2xl bg-white border border-black/5 shadow-sm flex flex-col gap-6">
+          <div className="p-6 md:p-8 rounded-2xl bg-[#1E252B] border border-white/5 flex flex-col gap-6 shadow-xl">
             
             {/* Control Outlines */}
-            <div className="flex flex-col gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
-              {/* Daily Volume slider */}
+              {/* Daily Volume typing field */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between items-center text-xs font-mono text-black/60">
-                  <label htmlFor="daily-volume-slider">DAILY VESSEL DEMAND:</label>
-                  <span className="font-bold text-base text-[#1a2e22]">{dailyVolume} cups / day</span>
+                <label htmlFor="daily-volume-input" className="text-[10px] font-mono text-[#F7F5F0]/50 uppercase tracking-wider">
+                  DAILY CUP DEMAND:
+                </label>
+                <div className="relative flex items-center">
+                  <input 
+                    id="daily-volume-input"
+                    type="number" 
+                    min="1" 
+                    max="100000" 
+                    value={dailyVolume} 
+                    onChange={(e) => setDailyVolume(Math.max(0, parseInt(e.target.value) || 0))}
+                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-3 text-sm font-mono text-[#F7F5F0] focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    style={{ minHeight: '48px' }}
+                  />
+                  <span className="absolute right-3 text-[10px] font-mono text-[#F7F5F0]/30 pointer-events-none">CUPS/DAY</span>
                 </div>
-                <input 
-                  id="daily-volume-slider"
-                  type="range" 
-                  min="50" 
-                  max="2000" 
-                  step="50"
-                  value={dailyVolume} 
-                  onChange={(e) => setDailyVolume(parseInt(e.target.value))}
-                  className="w-full h-1 bg-black/10 rounded-lg appearance-none cursor-pointer accent-[#1A2E22]" 
-                />
               </div>
 
-              {/* Paper cup unit cost slider */}
+              {/* Paper cup unit cost typing field */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between items-center text-xs font-mono text-black/60">
-                  <label htmlFor="paper-cost-slider">PAPER CUP + LID UNIT COST:</label>
-                  <span className="font-bold text-base text-[#1a2e22]">₹ {paperCupCost}.00 / cup</span>
+                <label htmlFor="paper-cost-input" className="text-[10px] font-mono text-[#F7F5F0]/50 uppercase tracking-wider">
+                  SINGLE-USE CUP + LID COST (₹):
+                </label>
+                <div className="relative flex items-center">
+                  <input 
+                    id="paper-cost-input"
+                    type="number" 
+                    min="0" 
+                    max="100" 
+                    value={paperCupCost} 
+                    onChange={(e) => setPaperCupCost(Math.max(0, parseFloat(e.target.value) || 0))}
+                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-3 text-sm font-mono text-[#F7F5F0] focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    style={{ minHeight: '48px' }}
+                  />
+                  <span className="absolute right-3 text-[10px] font-mono text-[#F7F5F0]/30 pointer-events-none">INR/CUP</span>
                 </div>
-                <input 
-                  id="paper-cost-slider"
-                  type="range" 
-                  min="4" 
-                  max="20" 
-                  step="1"
-                  value={paperCupCost} 
-                  onChange={(e) => setPaperCupCost(parseInt(e.target.value))}
-                  className="w-full h-1 bg-black/10 rounded-lg appearance-none cursor-pointer accent-[#1A2E22]" 
-                />
               </div>
 
             </div>
 
             {/* Calculations Grid Dashboard */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-black/5 pt-6 mt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/5 pt-6 mt-2">
               
-              <div className="p-4 rounded-xl bg-[#F7F5F0] border border-black/5 flex flex-col gap-1">
-                <span className="text-[9px] font-mono text-black/45 uppercase font-bold">Paper Cup Budget</span>
-                <span className="text-lg font-black font-mono text-black/80">
+              <div className="p-4 rounded-xl bg-black/35 border border-white/5 flex flex-col gap-1">
+                <span className="text-[9px] font-mono text-[#F7F5F0]/45 uppercase font-bold">Paper Cup Budget</span>
+                <span className="text-base font-black font-mono text-[#F7F5F0]/80">
                   ₹{annualPaperCupExpense.toLocaleString('en-IN')}
                 </span>
-                <span className="text-[8px] font-mono text-black/40">annualized</span>
+                <span className="text-[8px] font-mono text-[#F7F5F0]/40">annualized</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F7F5F0] border border-black/5 flex flex-col gap-1">
-                <span className="text-[9px] font-mono text-black/45 uppercase font-bold">Takeback Service</span>
-                <span className="text-lg font-black font-mono text-[#1a2e22]">
+              <div className="p-4 rounded-xl bg-black/35 border border-white/5 flex flex-col gap-1">
+                <span className="text-[9px] font-mono text-[#F7F5F0]/45 uppercase font-bold">Takeback Service</span>
+                <span className="text-base font-black font-mono text-[#A3E2C9]">
                   ₹{annualTakebackExpense.toLocaleString('en-IN')}
                 </span>
-                <span className="text-[8px] font-mono text-black/40">annualized subscription</span>
+                <span className="text-[8px] font-mono text-[#F7F5F0]/40">annualized subscription</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-mint/10 border border-mint/35 flex flex-col gap-1">
-                <span className="text-[9px] font-mono text-mint/90 uppercase font-bold">Net Budget Savings</span>
-                <span className="text-lg font-black font-mono text-[#1A2E22]">
+              <div className="p-4 rounded-xl bg-[#A3E2C9]/10 border border-[#A3E2C9]/20 flex flex-col gap-1 overflow-hidden">
+                <span className="text-[9px] font-mono text-[#A3E2C9]/90 uppercase font-bold">Net Budget Savings</span>
+                <span 
+                  className="text-[#A3E2C9] font-bold origin-left"
+                  style={{
+                    display: 'inline-block',
+                    fontSize: '1.25rem',
+                    transform: isSavingsScaling ? 'scale(1.15)' : 'scale(1)',
+                    transition: 'transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                  }}
+                >
                   ₹{annualSavings.toLocaleString('en-IN')}
                 </span>
-                <span className="text-[8px] font-mono text-[#1a2e22]/70 font-semibold">savings (₹ / year)</span>
+                <span className="text-[8px] font-mono text-[#A3E2C9]/70 font-semibold">savings (₹ / year)</span>
               </div>
 
             </div>
 
             {/* Waste offset metrics */}
-            <div className="p-4 rounded-xl bg-black/5 border border-black/5 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-black/25 border border-white/5 flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="text-[9px] font-mono text-black/45 uppercase">Landfill Waste Diverted</span>
-                <span className="text-xs font-semibold text-black/85 mt-0.5">
+                <span className="text-[9px] font-mono text-[#F7F5F0]/45 uppercase">Landfill Waste Diverted</span>
+                <span className="text-xs font-semibold text-[#F7F5F0]/85 mt-0.5">
                   Phases out {annualSingleUseCount.toLocaleString('en-IN')} single-use items/year
                 </span>
               </div>
-              <span className="text-sm font-black font-mono text-[#1a2e22] bg-white px-3 py-1.5 rounded-lg border border-black/5">
+              <span className="text-sm font-black font-mono text-[#A3E2C9] bg-black/50 px-3 py-1.5 rounded-lg border border-white/5">
                 {plasticWasteDivertedKg.toLocaleString('en-IN')} kg
               </span>
             </div>
@@ -164,19 +284,19 @@ export function B2BPortal() {
 
         </div>
 
-        {/* Right 5 Columns: Café Operator intake sheet */}
+        {/* Row 2, Right 5 Columns: Café Operator intake sheet */}
         <div className="col-span-1 lg:col-span-5 flex flex-col gap-6">
           
           <div className="flex flex-col gap-1">
-            <span className="text-xs font-mono uppercase text-gold-amber tracking-wider font-semibold">
+            <span className="text-xs font-mono uppercase text-[#F5B973] tracking-wider font-semibold">
               JOIN THE CIRCULARITY NETWORK
             </span>
-            <h2 className="display-header text-2xl font-bold text-[#0B0F12] uppercase">
+            <h2 className="display-header text-2xl font-bold text-[#F7F5F0] uppercase">
               PARTNER INTAKE FORM
             </h2>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#0B0F12] text-light-cream border border-white/10 shadow-xl relative overflow-hidden">
+          <div className="p-6 rounded-2xl bg-[#1E252B] text-[#F7F5F0] border border-white/10 shadow-xl relative overflow-hidden">
             
             {submitted ? (
               <div className="py-16 text-center flex flex-col items-center justify-center gap-4">
@@ -184,38 +304,63 @@ export function B2BPortal() {
                   ✓
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h3 className="display-header text-lg font-bold text-light-cream">Submission Received</h3>
-                  <p className="interface-text text-xs text-white/55 px-4 leading-relaxed">
-                    Our compliance engineers will contact your cafe team to perform outlets inspections within 24 hours.
+                  {/* TODO: confirm with founder */}
+                  <h3 className="display-header text-lg font-bold text-[#F7F5F0]">Inquiry Submitted Successfully</h3>
+                  {/* TODO: confirm with founder */}
+                  <p className="interface-text text-xs text-[#F7F5F0]/55 px-4 leading-relaxed">
+                    Thank you for joining the circular movement. Our partnership team will review your application and email you an onboarding packet within 24 hours.
                   </p>
                 </div>
               </div>
             ) : (
               <form onSubmit={handleIntakeSubmit} className="flex flex-col gap-4">
                 
+                {/* Contact Name input */}
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="cafeName" className="text-[10px] font-mono text-white/40 uppercase">CAFÉ BRAND NAME:</label>
+                  {/* TODO: confirm with founder */}
+                  <label htmlFor="contactName" className="text-[10px] font-mono text-[#F7F5F0]/40 uppercase">Contact Name / Partnership Lead:</label>
                   <input 
-                    id="cafeName"
+                    id="contactName"
                     type="text" 
-                    name="cafeName" 
+                    name="contactName" 
                     required 
-                    value={formData.cafeName} 
+                    value={formData.contactName} 
                     onChange={handleFormChange}
-                    placeholder="e.g. Specialty Outlets Inc"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-light-cream placeholder:text-white/20 focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    placeholder="e.g. John Doe"
+                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-[#F7F5F0] placeholder:text-white/20 focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    style={{ minHeight: '48px' }}
+                  />
+                </div>
+
+                {/* Brand Title input */}
+                <div className="flex flex-col gap-1">
+                  {/* TODO: confirm with founder */}
+                  <label htmlFor="brandTitle" className="text-[10px] font-mono text-[#F7F5F0]/40 uppercase">Café Brand Name & Title:</label>
+                  <input 
+                    id="brandTitle"
+                    type="text" 
+                    name="brandTitle" 
+                    required 
+                    value={formData.brandTitle} 
+                    onChange={handleFormChange}
+                    placeholder="e.g. Beverage Director / Founder"
+                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-[#F7F5F0] placeholder:text-white/20 focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    style={{ minHeight: '48px' }}
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
+                  {/* Total Active Outlets selection */}
                   <div className="flex flex-col gap-1">
-                    <label htmlFor="outlets" className="text-[10px] font-mono text-white/40 uppercase">ACTIVE OUTLETS:</label>
+                    {/* TODO: confirm with founder */}
+                    <label htmlFor="outlets" className="text-[10px] font-mono text-[#F7F5F0]/40 uppercase">Total Active Locations:</label>
                     <select 
                       id="outlets"
                       name="outlets"
                       value={formData.outlets} 
                       onChange={handleFormChange}
-                      className="w-full bg-[#1e252b] border border-white/10 rounded-lg px-3 py-2.5 text-xs text-light-cream focus:outline-none focus:border-mint"
+                      className="w-full bg-[#0B0F12] border border-white/10 rounded-lg px-3 py-2.5 text-xs text-[#F7F5F0] focus:outline-none focus:border-mint"
+                      style={{ minHeight: '48px' }}
                     >
                       <option value="1">1 Outlet</option>
                       <option value="2-5">2 to 5 Outlets</option>
@@ -224,17 +369,20 @@ export function B2BPortal() {
                     </select>
                   </div>
 
+                  {/* City Node Select dropdown */}
                   <div className="flex flex-col gap-1">
-                    <label htmlFor="city" className="text-[10px] font-mono text-white/40 uppercase">OPERATING CITY:</label>
+                    {/* TODO: confirm with founder */}
+                    <label htmlFor="city" className="text-[10px] font-mono text-[#F7F5F0]/40 uppercase">Primary City Node:</label>
                     <select 
                       id="city"
                       name="city"
                       value={formData.city} 
                       onChange={handleFormChange}
-                      className="w-full bg-[#1e252b] border border-white/10 rounded-lg px-3 py-2.5 text-xs text-light-cream focus:outline-none focus:border-mint"
+                      className="w-full bg-[#0B0F12] border border-white/10 rounded-lg px-3 py-2.5 text-xs text-[#F7F5F0] focus:outline-none focus:border-mint"
+                      style={{ minHeight: '48px' }}
                     >
-                      <option value="Mumbai">Mumbai</option>
                       <option value="Bangalore">Bangalore</option>
+                      <option value="Mumbai">Mumbai</option>
                       <option value="Delhi NCR">Delhi NCR</option>
                       <option value="Pune">Pune</option>
                     </select>
@@ -242,7 +390,8 @@ export function B2BPortal() {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="contactEmail" className="text-[10px] font-mono text-white/40 uppercase">PARTNERSHIP INVENTORY EMAIL:</label>
+                  {/* TODO: confirm with founder */}
+                  <label htmlFor="contactEmail" className="text-[10px] font-mono text-[#F7F5F0]/40 uppercase">Business Email Address:</label>
                   <input 
                     id="contactEmail"
                     type="email" 
@@ -251,7 +400,8 @@ export function B2BPortal() {
                     value={formData.contactEmail} 
                     onChange={handleFormChange}
                     placeholder="ops@yourbrand.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-light-cream placeholder:text-white/20 focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-[#F7F5F0] placeholder:text-white/20 focus:ring-1 focus:ring-mint focus:outline-none transition-all"
+                    style={{ minHeight: '48px' }}
                   />
                 </div>
 
@@ -262,24 +412,34 @@ export function B2BPortal() {
                     name="acceptedTerms" 
                     checked={formData.acceptedTerms} 
                     onChange={handleFormChange}
-                    className="w-4 h-4 rounded bg-[#1e252b] border-white/10 accent-mint focus:ring-0 focus:ring-offset-0 mt-0.5 cursor-pointer"
+                    className="w-4 h-4 rounded bg-[#0B0F12] border-white/10 accent-mint focus:ring-0 focus:ring-offset-0 mt-0.5 cursor-pointer"
+                    style={{ minHeight: '16px' }}
                   />
-                  <label htmlFor="acceptedTerms" className="text-[10px] font-mono text-white/60 leading-normal cursor-pointer select-none">
+                  {/* TODO: confirm with founder */}
+                  <label htmlFor="acceptedTerms" className="text-[10px] font-mono text-[#F7F5F0]/60 leading-normal cursor-pointer select-none">
                     I agree to supply food-grade safe washing cycles conforming to Takeback network hygiene parameters.
                   </label>
                 </div>
 
+                {/* TODO: confirm with founder */}
                 <MagneticButton 
                   type="submit"
-                  className="w-full py-3 bg-mint hover:bg-mint/90 text-deep-ink font-bold rounded-lg text-xs uppercase tracking-wider font-sans focus-visible:outline-none mt-2 spring-transition"
+                  className="w-full py-3 bg-[#A3E2C9] hover:bg-[#A3E2C9]/90 text-[#0B0F12] font-bold rounded-lg text-xs uppercase tracking-wider font-sans focus-visible:outline-none mt-2 spring-transition border-none cursor-pointer"
+                  style={{ minHeight: '48px' }}
                 >
-                  Submit Intake Application
+                  Send Inquiry & Request Pricing
                 </MagneticButton>
+
+                {/* B2B response commitment label */}
+                <div className="text-[10px] font-mono text-[#F7F5F0]/50 text-center mt-2">
+                  {/* TODO: confirm with founder */}
+                  We commit to responding to all partner applications within 24 hours.
+                </div>
 
               </form>
             )}
 
-            <div className="text-[9px] font-mono text-white/35 mt-6 border-t border-white/5 pt-3 flex justify-between">
+            <div className="text-[9px] font-mono text-[#F7F5F0]/35 mt-6 border-t border-white/5 pt-3 flex justify-between">
               <span>B2B COMPLIANCE INTERFACE v1.2</span>
               <span>SECURE ENDPOINT VALIDATED</span>
             </div>

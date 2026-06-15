@@ -6,7 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BottomNav from './components/BottomNav';
-import ThreeCupCanvas from './components/ThreeCupCanvas';
 
 // 7 Page Components
 import Homepage from './components/Homepage';
@@ -16,6 +15,8 @@ import Shop from './components/Shop';
 import ImpactHUD from './components/ImpactHUD';
 import B2BPortal from './components/B2BPortal';
 import AccountWallet from './components/AccountWallet';
+import About from './components/About';
+import JournalFeed from './components/JournalFeed';
 
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -33,22 +34,9 @@ function App() {
     fill: 'rgba(26, 46, 34, 0.08)'
   });
 
-  // 2. Global Canvas Motion State
+  // 2. Global Canvas Motion & SKU Size State
   const [reducedMotion, setReducedMotion] = useState(false);
-
-  // 3. Coordination properties ref (GSAP Animates these, WebGL reads them)
-  const vesselProps = useRef({
-    x: 0,            // offset as fraction of screen width (-0.5 to 0.5)
-    y: 0,            // offset as fraction of screen height (-0.5 to 0.5)
-    scale: 1.0,      // relative scale multiplier
-    rx: 0.15,        // pitch tilt rotation
-    ry: 0.8,         // yaw pivot rotation
-    opacity: 1,      // opacity layer target
-    userInteract: 0  // 0 = Scroll tracking, 1 = Configurator mouse tracking, 2 = Scan camera tracking
-  });
-
-  // Keep a separate ref for live mouse positions inside the configurator
-  const mouseConfig = useRef({ x: 0, y: 0 });
+  const [activeSKU, setActiveSKU] = useState('12oz');
 
   // 4. Global Rewards Particle System refs
   const rewardsCanvasRef = useRef(null);
@@ -74,152 +62,7 @@ function App() {
   // 7. Route Transitions & Scroll Positioning effect
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // Coordinate WebGL cup positions based on active route
-    if (currentRoute === '/') {
-      vesselProps.current.opacity = 1;
-      vesselProps.current.userInteract = 0;
-      vesselProps.current.scale = 1.0;
-      vesselProps.current.x = 0;
-      vesselProps.current.y = 0;
-    } else if (currentRoute === '/shop') {
-      vesselProps.current.opacity = 1;
-      vesselProps.current.userInteract = 1; // Align to shop configurator panel
-      vesselProps.current.scale = 0.85;
-    } else if (currentRoute === '/borrow') {
-      vesselProps.current.opacity = 0; // Invisible until scanning initiates
-      vesselProps.current.userInteract = 0;
-    } else {
-      // Hide WebGL cup on other routes (Impact, Return, B2B, Wallet)
-      vesselProps.current.opacity = 0;
-      vesselProps.current.userInteract = 0;
-    }
   }, [currentRoute]);
-
-  // 8. Custom Window Event Listeners for 3D interactions
-  useEffect(() => {
-    // Mouse hover updates from configurator
-    const handleConfigMouse = (e) => {
-      mouseConfig.current.x = e.detail.x;
-      mouseConfig.current.y = e.detail.y;
-    };
-    window.addEventListener('configurator-mouse', handleConfigMouse);
-
-    // Canvas mode changes triggered by Borrow scan button
-    const handleCanvasModeUpdate = (e) => {
-      vesselProps.current.userInteract = e.detail.mode;
-      if (e.detail.mode === 2) {
-        vesselProps.current.opacity = 1;
-      } else if (e.detail.mode === 0 && currentRoute === '/borrow') {
-        vesselProps.current.opacity = 0;
-      }
-    };
-    window.addEventListener('canvas-mode-update', handleCanvasModeUpdate);
-
-    return () => {
-      window.removeEventListener('configurator-mouse', handleConfigMouse);
-      window.removeEventListener('canvas-mode-update', handleCanvasModeUpdate);
-    };
-  }, [currentRoute]);
-
-  // 9. MASTER GSAP SCROLLTIMELINE CHOREOGRAPHY
-  useEffect(() => {
-    // Only run scrollytelling animations on homepage
-    if (currentRoute !== '/' || reducedMotion) return;
-
-    // Stage 1 to 2: Hero exit to Environmental Waste Realization Grid
-    const heroToWaste = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#hero-section",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      }
-    });
-    heroToWaste.to(vesselProps.current, {
-      x: 0.23,     // slide right to fit split column
-      y: 0.08,     // sink lower
-      scale: 0.72, // shrink to fit card content
-      rx: 0.28,    // tilt
-      ry: 2.2,     // spin
-      ease: "none"
-    });
-
-    // Stage 2 to 3: Environmental Waste to Horizontal Loop Slides
-    const wasteToLoop = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#waste-realization-section",
-        start: "bottom center",
-        end: "bottom top",
-        scrub: true,
-      }
-    });
-    wasteToLoop.to(vesselProps.current, {
-      x: -0.2,     // shift left to align with Card 1
-      scale: 0.65, // shrink
-      rx: 0.15,
-      ry: 3.6,
-      ease: "none"
-    });
-
-    // Loop Horizontal Wipes Sweep: Slides alongside cards
-    const loopWipes = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#system-loop-section",
-        start: "top top",
-        end: () => `+=${window.innerWidth * 2}`,
-        scrub: true,
-      }
-    });
-    loopWipes.to(vesselProps.current, {
-      x: 0.2, // Drifts right as horizontal scrolling swipes cards
-      ry: 5.5,
-      ease: "none"
-    });
-
-    // Stage 3 to 4: Slide off Loop into Configurator viewport target
-    const loopToConfig = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#product-configurator-section",
-        start: "top 80%",
-        end: "top 20%",
-        scrub: true,
-      }
-    });
-    loopToConfig.to(vesselProps.current, {
-      x: -0.25,     // Align left for split configurator area
-      scale: 0.8,
-      rx: 0.12,
-      ry: 6.8,
-      opacity: 1,
-      ease: "none"
-    });
-
-    // Toggle interactive mouse coordination control when configurator viewport is focused
-    ScrollTrigger.create({
-      trigger: "#product-configurator-section",
-      start: "top 50%",
-      end: "bottom 50%",
-      onToggle: (self) => {
-        vesselProps.current.userInteract = self.isActive ? 1 : 0;
-      }
-    });
-
-    // Fade out completely when scrolling down into PWADemo (Chapter 5)
-    gsap.to(vesselProps.current, {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#pwa-workflow-section",
-        start: "top 80%",
-        end: "top 30%",
-        scrub: true,
-      }
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [reducedMotion, currentRoute]);
 
   // 10. Rewards Canvas Resize setup
   useEffect(() => {
@@ -580,14 +423,7 @@ function App() {
       {/* 2. Global Header Navigation (z-1000) */}
       <Header currentRoute={currentRoute} setRoute={setRoute} />
 
-      {/* 3. Global WebGL 3D Cup Canvas (z-3000) */}
-      <ThreeCupCanvas 
-        activeVariant={activeVariant}
-        currentRoute={currentRoute}
-        vesselProps={vesselProps}
-        mouseConfig={mouseConfig}
-        reducedMotion={reducedMotion}
-      />
+
 
       {/* 4. Global Payout/Scan Rewards FX Layer Canvas (z-4000) */}
       <canvas 
@@ -598,12 +434,21 @@ function App() {
 
       {/* 5. Main Routed Screen Viewports */}
       <main className="relative z-100">
-        {currentRoute === '/' && <Homepage activeVariant={activeVariant} onColorwayChange={setActiveVariant} />}
+        {currentRoute === '/' && <Homepage activeVariant={activeVariant} onColorwayChange={setActiveVariant} setRoute={setRoute} />}
         {currentRoute === '/borrow' && <Borrow triggerReward={triggerReward} />}
         {currentRoute === '/return' && <ReturnMap triggerReward={triggerReward} />}
-        {currentRoute === '/shop' && <Shop activeVariant={activeVariant} onColorwayChange={setActiveVariant} />}
+        {currentRoute === '/shop' && (
+          <Shop 
+            activeVariant={activeVariant} 
+            onColorwayChange={setActiveVariant} 
+            activeSKU={activeSKU} 
+            setActiveSKU={setActiveSKU} 
+          />
+        )}
         {currentRoute === '/impact' && <ImpactHUD />}
         {currentRoute === '/for-cafes' && <B2BPortal />}
+        {currentRoute === '/about' && <About />}
+        {currentRoute === '/journal' && <JournalFeed />}
         {currentRoute === '/account' && <AccountWallet triggerReward={triggerReward} />}
       </main>
 
@@ -611,7 +456,7 @@ function App() {
       {currentRoute === '/' && renderFoundationalWorkspace()}
 
       {/* 7. Global system Footer directories (z-100) */}
-      <Footer />
+      <Footer setRoute={setRoute} />
 
       {/* 8. Mobile floating bottom tab navigation (z-5000) */}
       <BottomNav currentRoute={currentRoute} setRoute={setRoute} />

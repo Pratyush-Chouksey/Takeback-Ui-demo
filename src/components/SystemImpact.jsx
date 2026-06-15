@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export function SystemImpact() {
   // 1. Initial State configurations
+  // TODO: replace with real live data
   const [cups, setCups] = useState(1482910);
+  // TODO: replace with real live data
   const [co2, setCo2] = useState(41392.4);
   const [cashback, setCashback] = useState(2224360); // Represesenting currency in cents/paise format to enable formatting target ₹22,243,60
 
@@ -235,6 +237,47 @@ export function SystemImpact() {
 
             </div>
 
+          </div>
+        </div>
+
+        {/* Impact Report Section */}
+        {/* Impact infographic — circular data viz (CO2, cups, café pins) stub: assets/impact_infographic.png */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-t border-white/10 pt-12 mt-6">
+          <div className="col-span-1 lg:col-span-4 flex flex-col gap-4">
+            <span className="text-xs font-mono text-gold-amber tracking-wider font-semibold uppercase">
+              ANNUAL IMPACT REPORT
+            </span>
+            <h3 className="display-header text-2xl font-bold text-light-cream uppercase">
+              Closing the Loop
+            </h3>
+            <p className="interface-text text-sm text-[#F7F5F0]/60 leading-relaxed">
+              {/* TODO: replace with real live data */}
+              In our latest annual reporting period, TakeBack has successfully scaled its circular sharing loop to redirect massive volumes of single-use cups from landfills. Our warm, community-driven network has diverted over 1.4 million items and offset significant metric tons of carbon emission footprint, verifying that systemic reuse is the fastest path to circularity.
+            </p>
+          </div>
+          
+          <div className="col-span-1 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-2">
+              <span className="text-[10px] font-mono text-white/45 uppercase">ACTIVE PARTNER CAFÉS</span>
+              <span className="text-3xl font-black font-mono text-mint">
+                {/* TODO: replace with real live data */}
+                500+ Cafés
+              </span>
+              <p className="text-xs text-white/50 leading-relaxed">
+                Active cafes and roasting partners participating in the cup sharing network nationwide.
+              </p>
+            </div>
+            
+            <div className="p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-2">
+              <span className="text-[10px] font-mono text-white/45 uppercase">GEOGRAPHIC RANGE</span>
+              <span className="text-3xl font-black font-mono text-mint">
+                {/* TODO: replace with real live data */}
+                India
+              </span>
+              <p className="text-xs text-white/50 leading-relaxed">
+                Currently operating across major urban hubs and regional centers in India.
+              </p>
+            </div>
           </div>
         </div>
 

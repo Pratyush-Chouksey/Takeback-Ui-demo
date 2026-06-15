@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MagneticButton from './MagneticButton';
 
-export function Footer() {
+export function Footer({ setRoute }) {
   const [openSection, setOpenSection] = useState(null);
 
   const toggleSection = (sectionIndex) => {
@@ -12,28 +12,27 @@ export function Footer() {
     {
       title: 'THE LOOP',
       links: [
-        { label: 'Deposit Registry', href: '#' },
-        { label: 'Smart Bin Finder', href: '#' },
-        { label: 'B2B Coffee System', href: '#' },
-        { label: 'Carbon Offset Logs', href: '#' }
+        { label: 'Deposit Registry', path: '/' },
+        { label: 'Smart Bin Finder', path: '/return' },
+        { label: 'B2B Coffee System', path: '/for-cafes' },
+        { label: 'Carbon Offset Logs', path: '/impact' }
       ]
     },
     {
-      title: 'PRODUCT INDEX',
+      title: 'COMPANY',
       links: [
-        { label: 'The Insulated Vessel', href: '#' },
-        { label: 'Visual Configurator', href: '#' },
-        { label: 'Thermal Shield Lab', href: '#' },
-        { label: 'Usage Metrics Tracker', href: '#' }
+        { label: 'Founder Origin Archive', path: '/about' },
+        { label: 'Asymmetric Editorial', path: '/journal' },
+        { label: 'Usage Metrics Tracker', path: '/impact' },
+        { label: 'The Insulated Vessel', path: '/shop' }
       ]
     },
     {
       title: 'B2B NETWORK',
       links: [
-        { label: 'Join as Cafe Partner', href: '#' },
-        { label: 'Operator Dashboard', href: '#' },
-        { label: 'Cafe Pricing Guide', href: '#' },
-        { label: 'Success Case Diaries', href: '#' }
+        { label: 'Join as Cafe Partner', path: '/for-cafes' },
+        { label: 'Account Dashboard', path: '/account' },
+        { label: 'System Loop Guide', path: '/' }
       ]
     }
   ];
@@ -57,7 +56,7 @@ export function Footer() {
                 {/* Mobile Accordion Header / Desktop static label */}
                 <button 
                   onClick={() => toggleSection(idx)}
-                  className="w-full md:pointer-events-none text-left flex justify-between items-center focus-visible:outline-none"
+                  className="w-full md:pointer-events-none text-left flex justify-between items-center focus-visible:outline-none bg-transparent border-none cursor-pointer"
                   aria-expanded={isSectionOpen}
                 >
                   <h3 className="text-xs font-mono tracking-widest text-white/50 uppercase font-semibold">
@@ -75,12 +74,22 @@ export function Footer() {
                 }`}>
                   {dir.links.map((link, lIdx) => (
                     <li key={lIdx}>
-                      <a 
-                        href={link.href}
-                        className="interface-text text-white/70 hover:text-mint spring-transition focus-visible:outline-none"
-                      >
-                        {link.label}
-                      </a>
+                      {link.path && setRoute ? (
+                        <button
+                          onClick={() => setRoute(link.path)}
+                          className="interface-text text-white/70 hover:text-mint spring-transition focus-visible:outline-none bg-transparent border-none cursor-pointer text-left p-0"
+                          style={{ minHeight: 'auto' }}
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <a 
+                          href={link.href || '#'}
+                          className="interface-text text-white/70 hover:text-mint spring-transition focus-visible:outline-none"
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -142,7 +151,7 @@ export function Footer() {
               <div className="w-4 h-4 rounded-full bg-mint text-deep-ink flex items-center justify-center font-black text-[10px]">
                 B
               </div>
-              <span className="font-semibold uppercase tracking-wider">CERTIFIED B-CORP</span>
+              <span className="font-semibold uppercase tracking-wider">B-CORP (PENDING CERTIFICATION)</span>
             </div>
 
           </div>

@@ -9,6 +9,8 @@ export function Header({ currentRoute, setRoute }) {
     { label: 'Shop', path: '/shop' },
     { label: 'Impact Live', path: '/impact' },
     { label: 'For Cafés', path: '/for-cafes' },
+    { label: 'About', path: '/about' },
+    { label: 'Journal', path: '/journal' },
     { label: 'Account', path: '/account' }
   ];
 

@@ -8,11 +8,11 @@ import SystemImpact from './SystemImpact';
 import OperatorTrust from './OperatorTrust';
 import JournalFeed from './JournalFeed';
 
-export function Homepage({ activeVariant, onColorwayChange }) {
+export function Homepage({ activeVariant, onColorwayChange, setRoute }) {
   return (
     <div id="homepage-scrolly-container">
       {/* Narrative Section Wipes (Chapters 1 - 9) */}
-      <Hero />
+      <Hero setRoute={setRoute} />
       <WasteRealization />
       <SystemLoop />
       <ProductConfigurator activeVariant={activeVariant} onColorwayChange={onColorwayChange} />

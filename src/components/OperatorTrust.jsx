@@ -170,6 +170,28 @@ export function OperatorTrust() {
         </div>
       </div>
 
+      {/* B2B Teaser Block */}
+      <div className="layout-grid py-12 border-t border-black/10 my-8">
+        <div className="col-span-4 lg:col-span-12 flex flex-col md:flex-row items-center justify-between gap-6 bg-white/40 border border-black/5 p-8 rounded-2xl shadow-sm">
+          <div className="flex flex-col gap-2 max-w-xl text-left">
+            <span className="text-[10px] font-mono tracking-wider text-black/50 uppercase font-semibold">
+              B2B PARTNERSHIP OPPORTUNITY
+            </span>
+            <h3 className="display-header text-xl md:text-2xl font-bold text-[#0B0F12]">
+              {/* TODO: confirm with founder */}
+              Ready to transition your café to zero-waste packaging?
+            </h3>
+          </div>
+          <MagneticButton 
+            className="px-6 py-3 bg-[#0B0F12] text-light-cream hover:bg-[#1E252B] font-semibold text-xs rounded-xl tracking-wider uppercase font-sans border-none cursor-pointer flex-shrink-0"
+            onClick={() => alert("Redirecting to Cafe partner hub...")}
+          >
+            {/* TODO: confirm with founder */}
+            Get B2B Pricing
+          </MagneticButton>
+        </div>
+      </div>
+
       {/* Decorative spacing/footer */}
       <div className="layout-grid pt-4 border-t border-black/5">
         <div className="col-span-4 lg:col-span-12 flex justify-between items-center text-[10px] font-mono text-black/40">

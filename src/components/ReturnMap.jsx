@@ -1,159 +1,257 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MagneticButton from './MagneticButton';
 
 export function ReturnMap({ triggerReward }) {
   const [returnState, setReturnState] = useState('idle'); // idle, checking, refunded
-  const [selectedNode, setSelectedNode] = useState(null);
+  const [selectedCafe, setSelectedCafe] = useState({
+    id: 'thirdwave',
+    name: 'Third Wave Coffee Co.',
+    nodes: '14 Urban Hub Nodes',
+    location: 'Bengaluru Core',
+    x: 180,
+    y: 220,
+    dist: '1.2 km',
+    description: 'Active drop points covering Indiranagar, Koramangala, and HSR Layout.'
+  });
 
-  const nodes = [
-    { name: 'Subko Cafe Node', type: 'Partner Cafe', dist: '25m', status: 'Active', capacity: 'Low Waste' },
-    { name: 'Blue Tokai Node', type: 'Partner Cafe', dist: '220m', status: 'Active', capacity: 'Medium Waste' },
-    { name: 'Terminal 2 Smart Bin', type: 'Automated Drop', dist: '350m', status: 'Active', capacity: 'Empty' },
-    { name: 'Third Wave Node', type: 'Partner Cafe', dist: '800m', status: 'Maintenance', capacity: 'Full' }
+  const cafes = [
+    {
+      id: 'thirdwave',
+      name: 'Third Wave Coffee Co.',
+      nodes: '14 Urban Hub Nodes',
+      location: 'Bengaluru Core',
+      x: 180,
+      y: 220,
+      dist: '1.2 km',
+      description: 'Active drop points covering Indiranagar, Koramangala, and HSR Layout.'
+    },
+    {
+      id: 'bluetokai',
+      name: 'Blue Tokai Coffee Roasters',
+      nodes: '22 Metro Nodes',
+      location: 'Mumbai/Delhi Capital Region',
+      x: 280,
+      y: 130,
+      dist: '3.4 km',
+      description: 'Active drop points covering Bandra, Colaba, Safdarjung, and CyberCity.'
+    },
+    {
+      id: 'subko',
+      name: 'Subko Coffee Roasters',
+      nodes: '6 Specialty Nodes',
+      location: 'Bandra/Colaba Districts',
+      x: 110,
+      y: 310,
+      dist: '0.8 km',
+      description: 'Specialty nodes featuring integrated smart return drawer bays.'
+    },
+    {
+      id: 'araku',
+      name: 'Araku Coffee',
+      nodes: '2 flagship Heritage Nodes',
+      location: 'Indiranagar Hub',
+      x: 310,
+      y: 280,
+      dist: '1.9 km',
+      description: 'Flagship smart bin return node equipped with automatic weigh scale detectors.'
+    }
   ];
 
-  const handleReturnSimulate = (node) => {
-    setSelectedNode(node);
+  const handleReturnSimulate = () => {
     setReturnState('checking');
-    
     // Simulate drop validation checklist
     setTimeout(() => {
       setReturnState('refunded');
-      triggerReward(); // trigger cashback coins rain cascade!
+      triggerReward(); // trigger cashback rain cascade!
     }, 1200);
   };
 
   const resetReturn = () => {
     setReturnState('idle');
-    setSelectedNode(null);
   };
 
   return (
     <section className="min-h-screen w-full bg-[#1E252B] text-light-cream pt-28 pb-16 flex items-center justify-center">
       <div className="layout-grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         
-        {/* Left Side: Geolocation Dashboard Nodes List */}
+        {/* Left Side: Directory of active cafes */}
         <div className="col-span-4 lg:col-span-6 flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase text-mint tracking-wider font-bold">
               GEOLOCATION SEARCH
             </span>
-            <h1 className="display-header text-4xl md:text-5xl font-black text-light-cream leading-none">
-              DROP MAP NODES
+            <h1 className="display-header text-4xl md:text-5xl font-black text-light-cream leading-none uppercase">
+              DROP POINT DIRECTORY
             </h1>
+            <p className="interface-text text-sm text-white/70 mt-1">
+              Select an active partner cafe below to focus coordinates. Scan the smart drop-box to return vessels and earn ₹15 cashback.
+            </p>
           </div>
 
-          <p className="interface-text text-sm text-white/70">
-            Find the closest smart drop bin or partner café. Deposit the vessel, confirm return, and receive instant cashback.
-          </p>
-
-          {/* Dynamic nodes grid */}
-          <div className="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-2">
-            {nodes.map((node, i) => (
-              <div 
-                key={i}
-                onClick={() => setSelectedNode(node)}
-                className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 ${
-                  selectedNode?.name === node.name 
-                    ? 'bg-mint/10 border-mint' 
-                    : 'bg-white/5 border-white/10 hover:bg-white/10'
-                }`}
-              >
-                <div className="flex justify-between items-start">
-                  <div className="flex flex-col">
-                    <span className="text-xs font-mono text-white/50">{node.type}</span>
-                    <h3 className="display-header text-sm font-bold text-light-cream mt-0.5">{node.name}</h3>
+          {/* Glassmorphic Cafe Directory */}
+          <div className="flex flex-col gap-3 pr-2 overflow-y-auto max-h-[380px]">
+            {cafes.map((cafe) => {
+              const isSelected = selectedCafe.id === cafe.id;
+              return (
+                <div 
+                  key={cafe.id}
+                  onClick={() => setSelectedCafe(cafe)}
+                  onMouseEnter={() => setSelectedCafe(cafe)}
+                  className={`glass-panel p-5 rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-0.5 border ${
+                    isSelected 
+                      ? 'bg-mint/10 border-mint shadow-md' 
+                      : 'border-white/5 bg-[#1a252b]/40 hover:bg-[#1a252b]/60'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-mono text-mint tracking-wider font-bold uppercase">
+                        {cafe.nodes}
+                      </span>
+                      <h3 className="display-header text-base font-bold text-light-cream">
+                        {cafe.name}
+                      </h3>
+                      <span className="text-xs text-white/55 font-mono">{cafe.location}</span>
+                    </div>
+                    <span className="text-xs font-mono text-mint font-bold bg-mint/10 px-2.5 py-1 rounded">
+                      {cafe.dist}
+                    </span>
                   </div>
-                  <span className="text-xs font-mono text-mint font-bold">{node.dist}</span>
+                  
+                  {isSelected && (
+                    <p className="interface-text text-xs text-white/70 mt-3 pt-3 border-t border-white/5 leading-relaxed">
+                      {cafe.description}
+                    </p>
+                  )}
                 </div>
-                <div className="flex justify-between items-center mt-3 pt-2 border-t border-white/5 text-[10px] font-mono">
-                  <span className={`px-2 py-0.5 rounded ${
-                    node.status === 'Active' ? 'bg-mint/20 text-mint' : 'bg-red-400/20 text-red-400'
-                  }`}>
-                    {node.status}
-                  </span>
-                  <span className="text-white/40">{node.capacity}</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* Right Side: Visual Map Simulation Window & Return Trigger */}
-        <div className="col-span-4 lg:col-span-6 flex flex-col justify-between p-6 rounded-2xl bg-white/5 border border-white/10 relative overflow-hidden min-h-[400px]">
+        {/* Right Side: Geolocation Map simulation and cashback drawer */}
+        <div className="col-span-4 lg:col-span-6 flex flex-col gap-6 justify-between p-6 rounded-2xl bg-white/5 border border-white/10 relative overflow-hidden min-h-[460px]">
           
-          {/* Simulated Geolocation HUD Grid */}
-          <div className="absolute inset-0 opacity-15 pointer-events-none flex flex-wrap p-2 gap-4">
-            {Array.from({ length: 48 }).map((_, i) => (
-              <div key={i} className="w-10 h-10 border border-white/10 rounded flex items-center justify-center font-mono text-[8px]">
-                +
+          {/* Map Viewer Container */}
+          <div className="flex-1 w-full rounded-xl bg-black/50 border border-white/10 relative overflow-hidden flex items-center justify-center shadow-inner">
+            
+            {/* Moving Geolocation Map Background */}
+            <div 
+              className="absolute w-[800px] h-[800px] flex items-center justify-center"
+              style={{
+                transform: `translate3d(${200 - selectedCafe.x}px, ${200 - selectedCafe.y}px, 0)`,
+                transition: 'transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+              }}
+            >
+              {/* Map grid streets representation */}
+              <div className="absolute inset-0 bg-[#0F1418] grid grid-cols-10 grid-rows-10 opacity-40">
+                {Array.from({ length: 100 }).map((_, i) => (
+                  <div key={i} className="border-[0.5px] border-white/10 flex items-center justify-center font-mono text-[6px] text-white/5" />
+                ))}
               </div>
-            ))}
+
+              {/* Streets paths */}
+              <div className="absolute w-[800px] h-2 bg-white/5 rotate-12 top-[120px]" />
+              <div className="absolute w-[800px] h-3 bg-white/5 -rotate-45 top-[340px]" />
+              <div className="absolute w-[800px] h-2 bg-white/5 rotate-90 left-[400px]" />
+              <div className="absolute w-[800px] h-1.5 bg-white/5 rotate-45 top-[580px]" />
+
+              {/* Cafe Node Pins */}
+              {cafes.map((cafe) => {
+                const isSelected = selectedCafe.id === cafe.id;
+                return (
+                  <div 
+                    key={cafe.id}
+                    className="absolute transition-transform duration-300"
+                    style={{ left: `${cafe.x}px`, top: `${cafe.y}px` }}
+                  >
+                    <div className="relative flex items-center justify-center">
+                      {/* Pulse ring indicator in Tech Mint (#A3E2C9) */}
+                      {isSelected && (
+                        <>
+                          <div className="absolute w-12 h-12 rounded-full border-2 border-[#A3E2C9] animate-ping opacity-45" />
+                          <div className="absolute w-6 h-6 rounded-full border border-[#A3E2C9] animate-pulse" />
+                        </>
+                      )}
+                      
+                      {/* Central node pin dot */}
+                      <div 
+                        onClick={() => setSelectedCafe(cafe)}
+                        className={`w-3.5 h-3.5 rounded-full cursor-pointer border shadow transition-transform ${
+                          isSelected ? 'bg-[#A3E2C9] border-[#0B0F12] scale-125' : 'bg-[#F5B973] border-white'
+                        }`}
+                      />
+
+                      {/* Label tooltip */}
+                      <span className="absolute top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#0B0F12]/90 border border-white/15 px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-wide text-[#F7F5F0] shadow-md">
+                        {cafe.name.split(' ')[0]}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Viewfinder crosshair overlay */}
+            <div className="absolute inset-0 pointer-events-none border-2 border-dashed border-[#A3E2C9]/20 rounded-lg m-2 flex items-center justify-center">
+              <div className="w-4 h-4 border border-[#A3E2C9]/45 rounded-full flex items-center justify-center opacity-70">
+                <div className="w-1 h-1 bg-[#A3E2C9] rounded-full" />
+              </div>
+            </div>
           </div>
 
-          <div className="relative z-10 w-full flex flex-col gap-4">
-            <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest">// drop point node interface</span>
-            
-            {selectedNode ? (
-              <div className="p-6 rounded-xl bg-deep-ink border border-white/10 flex flex-col gap-4">
-                <div className="flex justify-between items-baseline border-b border-white/10 pb-3">
-                  <h3 className="display-header text-base font-bold text-light-cream">{selectedNode.name}</h3>
-                  <span className="text-xs font-mono text-mint">{selectedNode.dist} away</span>
-                </div>
+          {/* Interactive Simulation validation drawer */}
+          <div className="z-10 bg-[#0B0F12] border border-white/10 p-5 rounded-xl flex flex-col gap-4">
+            <div className="flex justify-between items-baseline border-b border-white/5 pb-3">
+              <h3 className="display-header text-sm font-bold text-light-cream uppercase tracking-wide">
+                Smart Drop Validation
+              </h3>
+              <span className="text-xs font-mono text-mint">{selectedCafe.dist} away</span>
+            </div>
 
-                {returnState === 'idle' && (
-                  <div className="flex flex-col gap-4">
-                    <p className="interface-text text-xs text-white/60 leading-relaxed">
-                      Confirm you have placed the vessel inside the smart bin receiver. The deposit sensor will validate the QR code.
-                    </p>
-                    <button
-                      onClick={() => handleReturnSimulate(selectedNode)}
-                      className="w-full py-3 bg-mint hover:bg-mint/95 text-deep-ink font-bold rounded-xl text-xs uppercase tracking-wider font-sans focus-visible:outline-none spring-transition"
-                    >
-                      Confirm Drop-off Validation
-                    </button>
-                  </div>
-                )}
-
-                {returnState === 'checking' && (
-                  <div className="flex flex-col items-center justify-center py-6 gap-3">
-                    <div className="w-8 h-8 rounded-full border-2 border-mint border-t-transparent animate-spin" />
-                    <span className="text-xs font-mono text-mint uppercase">processing refund settlement...</span>
-                  </div>
-                )}
-
-                {returnState === 'refunded' && (
-                  <div className="flex flex-col items-center text-center gap-3 py-4">
-                    <div className="w-12 h-12 rounded-full bg-mint/20 border border-mint flex items-center justify-center text-mint font-black text-lg animate-bounce">
-                      ✓
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-xl font-black font-mono text-[#F5B973]">+ ₹50.00</span>
-                      <span className="text-[10px] font-mono text-white/40 uppercase">UPI Settlement Success</span>
-                    </div>
-                    <button
-                      onClick={resetReturn}
-                      className="text-xs font-mono text-mint underline hover:text-white mt-2 focus-visible:outline-none"
-                    >
-                      Scan Another Vessel
-                    </button>
-                  </div>
-                )}
+            {returnState === 'idle' && (
+              <div className="flex flex-col gap-3">
+                <p className="interface-text text-xs text-white/60 leading-relaxed">
+                  Verify your vessel is placed inside the <strong>{selectedCafe.name}</strong> receiver bin. The photo-sensor will validate the base stamp.
+                </p>
+                <button
+                  onClick={handleReturnSimulate}
+                  className="w-full py-3.5 bg-mint hover:bg-mint/95 text-deep-ink font-bold rounded-xl text-xs uppercase tracking-wider font-sans focus-visible:outline-none cursor-pointer"
+                  style={{ minHeight: '48px' }}
+                >
+                  Simulate Deposit Scan
+                </button>
               </div>
-            ) : (
-              <div className="flex-1 flex flex-col justify-center items-center text-center py-20 gap-4 border border-dashed border-white/10 rounded-xl bg-deep-ink/50 p-6">
-                <svg className="w-10 h-10 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs font-semibold text-light-cream">No Node Selected</span>
-                  <span className="text-[9px] font-mono text-white/40 uppercase">Select a node from the map dashboard to return</span>
+            )}
+
+            {returnState === 'checking' && (
+              <div className="flex flex-col items-center justify-center py-6 gap-3">
+                <div className="w-8 h-8 rounded-full border-2 border-mint border-t-transparent animate-spin" />
+                <span className="text-xs font-mono text-mint uppercase tracking-wider">checking drop validation webhook...</span>
+              </div>
+            )}
+
+            {returnState === 'refunded' && (
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-mint/20 border border-mint flex items-center justify-center text-mint font-black text-lg animate-bounce">
+                  ✓
                 </div>
+                <div className="flex flex-col">
+                  <span className="text-xl font-black font-mono text-gold-amber">+ ₹ 15.00</span>
+                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest mt-0.5">UPI CASHBACK SETTLED</span>
+                </div>
+                <button
+                  onClick={resetReturn}
+                  className="text-xs font-mono text-mint underline hover:text-white mt-1 focus-visible:outline-none cursor-pointer"
+                  style={{ minHeight: '48px' }}
+                >
+                  Return Another Vessel
+                </button>
               </div>
             )}
           </div>
 
-          <div className="text-[10px] font-mono text-white/30 mt-6 pt-4 border-t border-white/5 flex justify-between">
+          <div className="text-[10px] font-mono text-white/30 pt-4 border-t border-white/5 flex justify-between select-none">
             <span>NETWORK SYSTEM CORE v1.0</span>
             <span>SECURE ESCROW CHANNEL</span>
           </div>

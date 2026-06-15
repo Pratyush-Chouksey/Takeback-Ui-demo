@@ -28,16 +28,16 @@ export function WasteRealization() {
           start: "top top",
           end: "bottom bottom",
           pin: leftCol,
-          pinSpacing: false,
+          pinSpacing: true,
         });
       });
 
-      // 2. Scroll-Driven Numerical Counter for Block 1 (Fifty Billion)
+      // 2. Scroll-Driven Numerical Counter for Block 1 (One Billion)
       const counterEl = document.getElementById("scroll-digit-counter");
       if (counterEl) {
         const counterObj = { value: 0 };
         gsap.to(counterObj, {
-          value: 50000000000,
+          value: 1000000000,
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: "#metric-block-1",
@@ -97,12 +97,12 @@ export function WasteRealization() {
         >
           <div className="flex flex-col gap-3 max-w-md">
             <span className="text-xs font-mono text-mint tracking-[0.2em] font-semibold uppercase">
-              CHAPTER 2 // THE LANDFILL OVERFLOW
+              CHAPTER 2 // STRATEGIC MISSION
             </span>
-            <h2 className="display-header text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.05] tracking-[-0.03em] text-light-cream">
-              THE DISPOSABLE TRUTH
+            <h2 className="display-header text-[32px] md:text-[44px] lg:text-[56px] font-bold leading-[1.10] tracking-[-0.03em] text-light-cream animate-fade-in">
+              We exist to make reuse second nature for coffee lovers across India. By partnering with local cafes, we're building a seamless, circular borrow-and-return system that eliminates single-use cups entirely, keeping our oceans clean and our communities thriving.
             </h2>
-            <div className="w-12 h-1 bg-mint mt-4 rounded-full" />
+            <div className="w-12 h-1 bg-mint mt-6 rounded-full" />
           </div>
         </div>
 
@@ -129,7 +129,7 @@ export function WasteRealization() {
               <span 
                 id="scroll-digit-counter" 
                 className="technical-figures text-2xl md:text-4xl font-black text-mint tracking-tight font-sans"
-                aria-label="Fifty Billion Single Use Disposable Cups Generated Annually Across India"
+                aria-label="One Billion Single Use Disposable Cups Generated Annually Across India"
               >
                 0
               </span>
@@ -137,7 +137,7 @@ export function WasteRealization() {
             </div>
 
             <p className="interface-text text-sm md:text-base text-white/70 leading-[1.60] max-w-xl">
-              Fifty billion paper and plastic cups are thrown away every year in India. The vast majority cannot be recycled due to complex microplastic laminate linings, building immediate toxicity inside global water tables.
+              One billion paper and plastic cups are thrown away every year in India. The vast majority cannot be recycled due to complex microplastic laminate linings, building immediate toxicity inside global water tables.
             </p>
           </div>
 
