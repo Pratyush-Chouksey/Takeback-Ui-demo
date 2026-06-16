@@ -91,7 +91,7 @@ export function JournalFeed() {
           On viewports <= 768px, collapses into a single-column layout with no offsets.
           Uses CSS columns mapping for smooth masonry columns alignment.
         */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 [column-fill:_balance] w-full">
+        <div className="flow-root columns-1 md:columns-2 lg:columns-3 gap-8 [column-fill:_balance] w-full pb-12">
           {filteredArticles.map((art, idx) => {
             const illustrationKey = art.illustration;
             return (
@@ -135,7 +135,7 @@ export function JournalFeed() {
                     <span>{art.readTime}</span>
                   </div>
                   <MagneticButton className="px-3.5 py-1.5 bg-black/5 text-[#0B0F12] group-hover:bg-[#A3E2C9] group-hover:text-[#0B0F12] text-[10px] font-bold uppercase tracking-wider font-sans rounded-md transition-colors duration-300 border-none cursor-pointer">
-                    Read Log
+                    Read Article
                   </MagneticButton>
                 </div>
 

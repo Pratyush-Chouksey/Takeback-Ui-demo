@@ -1,19 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MagneticButton from './MagneticButton';
 
-export function AccountWallet({ triggerReward }) {
-  // Wallet states
-  const [walletBalance, setWalletBalance] = useState(45); // in ₹
-  const [upiAddress, setUpiAddress] = useState('pratyush@upi');
+export function AccountWallet({ triggerReward, authToken, currentUser, onLoginClick }) {
+  const [walletBalance, setWalletBalance] = useState(0);
+  const [upiAddress, setUpiAddress] = useState('');
   const [withdrawState, setWithdrawState] = useState('idle'); // idle, processing, success
-  
-  // Return transactions timeline log database simulation
-  const transactions = [
-    { id: 'TX-9421', cafe: 'Cafe 1 Node', time: 'Today, 10:14 AM', deposit: '₹50.00', status: 'Refunded', isReturned: true },
-    { id: 'TX-9388', cafe: 'Cafe 2 Bin', time: 'Yesterday, 04:32 PM', deposit: '₹50.00', status: 'Refunded', isReturned: true },
-    { id: 'TX-9310', cafe: 'Cafe 3 Node', time: '10 Jun 2026, 01:15 PM', deposit: '₹50.00', status: 'In Escrow', isReturned: false },
-    { id: 'TX-9128', cafe: 'Cafe 4 Node', time: '05 Jun 2026, 09:40 AM', deposit: '₹50.00', status: 'Refunded', isReturned: true }
-  ];
+  const [transactions, setTransactions] = useState([]);
+  const [stats, setStats] = useState({
+    totalBorrows: 0,
+    returnRate: '100%',
+    carbonScore: '0 kg'
+  });
+  const [loading, setLoading] = useState(true);
+
+  const fetchDashboardData = async () => {
+    if (!authToken) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/user/dashboard', {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setWalletBalance(data.walletBalance || 0);
+        
+        // Map history to transactions layout
+        const history = data.borrowHistory || [];
+        const txs = history.map(item => {
+          const isReturned = item.status === 'Returned';
+          const statusLabel = 
+            item.status === 'Returned' ? 'Refunded' : 
+            item.status === 'Return Requested' ? 'Pending Audit' : 'In Escrow';
+
+          return {
+            id: item._id ? `TX-${item._id.substring(item._id.length - 6).toUpperCase()}` : `TX-${item.cupId}`,
+            cafe: `Smart Cup ${item.cupId}`,
+            time: new Date(item.borrowedAt).toLocaleDateString() + ', ' + new Date(item.borrowedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            deposit: '₹50.00',
+            status: statusLabel,
+            isReturned
+          };
+        });
+        setTransactions(txs);
+
+        // Calculate metrics
+        const total = history.length;
+        const returned = history.filter(h => h.status === 'Returned').length;
+        const rate = total > 0 ? ((returned / total) * 100).toFixed(1) + '%' : '100%';
+        const carbon = (returned * 0.58).toFixed(2) + ' kg';
+
+        setStats({
+          totalBorrows: total,
+          returnRate: rate,
+          carbonScore: carbon
+        });
+      }
+    } catch (err) {
+      console.error('Error loading user dashboard:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, [authToken]);
 
   const handleWithdraw = (e) => {
     e.preventDefault();
@@ -28,13 +84,48 @@ export function AccountWallet({ triggerReward }) {
       setWalletBalance(0);
       triggerReward(); // Trigger gold coins particle cascade!
       
-      // Auto-reset back to idle after 4 seconds
+      // Auto-reset back to idle after 4.2 seconds
       setTimeout(() => {
         setWithdrawState('idle');
       }, 4200);
 
     }, 1500);
   };
+
+  if (!authToken) {
+    return (
+      <section className="min-h-screen w-full bg-[#0B0F12] text-light-cream pt-28 pb-16 flex items-center justify-center">
+        <div className="max-w-md w-full mx-5 p-8 rounded-2xl bg-[#121613] border border-white/10 text-center flex flex-col items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-mint text-2xl">
+            💳
+          </div>
+          <div className="flex flex-col gap-2">
+            <h2 className="display-header text-2xl font-bold uppercase text-light-cream">Member Wallet</h2>
+            <p className="interface-text text-sm text-white/60">
+              Sign in to view your circular rewards wallet, active borrows, and request cashback withdrawals.
+            </p>
+          </div>
+          <button 
+            onClick={onLoginClick}
+            className="px-6 py-2.5 bg-mint hover:bg-mint/90 text-deep-ink font-bold rounded-lg text-xs uppercase tracking-wider cursor-pointer border-none spring-transition"
+          >
+            Sign In / Register
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <section className="min-h-screen w-full bg-[#0B0F12] text-light-cream pt-28 pb-16 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 rounded-full border-2 border-mint border-t-transparent animate-spin" />
+          <span className="text-xs font-mono text-mint uppercase tracking-wider">Loading Wallet Ledger...</span>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 
@@ -63,67 +154,73 @@ export function AccountWallet({ triggerReward }) {
             
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col">
               <span className="text-[9px] font-mono text-white/40 uppercase">Total Borrows</span>
-              <span className="text-xl md:text-2xl font-black font-mono text-mint mt-1 font-mono technical-figures">14</span>
+              <span className="text-xl md:text-2xl font-black font-mono text-mint mt-1 font-mono technical-figures">{stats.totalBorrows}</span>
               <span className="text-[8px] font-mono text-white/30 uppercase mt-0.5">Vessels Released</span>
             </div>
 
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col">
               <span className="text-[9px] font-mono text-white/40 uppercase">Return Rate</span>
-              <span className="text-xl md:text-2xl font-black font-mono text-mint mt-1 font-mono technical-figures">93.5%</span>
+              <span className="text-xl md:text-2xl font-black font-mono text-mint mt-1 font-mono technical-figures">{stats.returnRate}</span>
               <span className="text-[8px] font-mono text-white/30 uppercase mt-0.5">Escrow settlements</span>
             </div>
 
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col">
               <span className="text-[9px] font-mono text-white/40 uppercase">Carbon Score</span>
-              <span className="text-xl md:text-2xl font-black font-mono text-[#F5B973] mt-1 font-mono technical-figures">8.2 kg</span>
+              <span className="text-xl md:text-2xl font-black font-mono text-[#F5B973] mt-1 font-mono technical-figures">{stats.carbonScore}</span>
               <span className="text-[8px] font-mono text-white/30 uppercase mt-0.5">CO2 Diverted</span>
             </div>
 
           </div>
 
           {/* Return timeline log list */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 text-left">
             <span className="text-[10px] font-mono text-white/45 uppercase tracking-wider font-bold">
               // ACTIVE RETURN TIMELINE LOG
             </span>
 
-            <div className="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
-              {transactions.map((tx) => (
-                <div 
-                  key={tx.id} 
-                  className="p-4 rounded-xl bg-[#1E252B] border border-white/5 flex items-center justify-between transition-colors duration-300 hover:bg-white/5"
-                >
-                  <div className="flex items-center gap-3">
-                    {/* Circle status indicator */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
-                      tx.isReturned 
-                        ? 'bg-mint/10 border border-mint/35 text-mint' 
-                        : 'bg-gold-amber/10 border border-gold-amber/35 text-gold-amber animate-pulse'
-                    }`}>
-                      {tx.isReturned ? '✓' : '●'}
+            {transactions.length === 0 ? (
+              <div className="p-6 rounded-xl bg-white/5 border border-white/5 text-center text-white/40 interface-text text-xs">
+                No borrowing history or active escrows found on this account.
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
+                {transactions.map((tx) => (
+                  <div 
+                    key={tx.id} 
+                    className="p-4 rounded-xl bg-[#1E252B] border border-white/5 flex items-center justify-between transition-colors duration-300 hover:bg-white/5"
+                  >
+                    <div className="flex items-center gap-3">
+                      {/* Circle status indicator */}
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
+                        tx.isReturned 
+                          ? 'bg-mint/10 border border-mint/35 text-mint' 
+                          : 'bg-gold-amber/10 border border-gold-amber/35 text-gold-amber animate-pulse'
+                      }`}>
+                        {tx.isReturned ? '✓' : '●'}
+                      </div>
+                      
+                      <div className="flex flex-col">
+                        <span className="text-xs font-mono text-white/40">{tx.id} • {tx.time}</span>
+                        <h3 className="display-header text-sm font-bold text-light-cream mt-0.5">{tx.cafe}</h3>
+                      </div>
                     </div>
-                    
-                    <div className="flex flex-col">
-                      <span className="text-xs font-mono text-white/40">{tx.id} • {tx.time}</span>
-                      <h3 className="display-header text-sm font-bold text-light-cream mt-0.5">{tx.cafe}</h3>
-                    </div>
-                  </div>
 
-                  <div className="text-right flex flex-col items-end">
-                    <span className="text-xs font-mono text-light-cream font-semibold">{tx.deposit}</span>
-                    <span className={`text-[9px] font-mono font-bold uppercase ${
-                      tx.isReturned ? 'text-mint' : 'text-gold-amber'
-                    }`}>{tx.status}</span>
+                    <div className="text-right flex flex-col items-end">
+                      <span className="text-xs font-mono text-light-cream font-semibold">{tx.deposit}</span>
+                      <span className={`text-[9px] font-mono font-bold uppercase ${
+                        tx.isReturned ? 'text-mint' : 'text-gold-amber'
+                      }`}>{tx.status}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
         </div>
 
         {/* Right 5 Columns: Withdraw drawer interface */}
-        <div className="col-span-1 lg:col-span-5 flex flex-col gap-6">
+        <div className="col-span-1 lg:col-span-5 flex flex-col gap-6 text-left">
           
           <div className="flex flex-col gap-1">
             <span className="text-xs font-mono uppercase text-gold-amber tracking-wider font-semibold">
@@ -200,7 +297,7 @@ export function AccountWallet({ triggerReward }) {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h3 className="display-header text-base font-bold text-light-cream uppercase">Withdrawal Initiated</h3>
-                  <span className="text-xl font-mono text-[#F5B973] font-black">+ ₹45.00</span>
+                  <span className="text-xl font-mono text-[#F5B973] font-black">+ ₹{walletBalance.toFixed(2)}</span>
                   <p className="interface-text text-[10px] text-white/50 px-2 leading-relaxed mt-1">
                     UPI Instant Settlement complete. Please check your banking notification log.
                   </p>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MagneticButton from './MagneticButton';
 
-export function Header({ currentRoute, setRoute }) {
+export function Header({ currentRoute, setRoute, currentUser, onSignOut, onLoginClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
@@ -13,6 +13,10 @@ export function Header({ currentRoute, setRoute }) {
     { label: 'Journal', path: '/journal' },
     { label: 'Account', path: '/account' }
   ];
+
+  if (currentUser && currentUser.role === 'admin') {
+    navLinks.push({ label: 'Admin Panel', path: '/admin' });
+  }
 
   return (
     <>
@@ -26,7 +30,7 @@ export function Header({ currentRoute, setRoute }) {
           >
             <span className="w-3.5 h-3.5 rounded-full bg-mint shadow-[0_0_12px_rgba(163,226,201,0.5)] spring-transition group-hover:scale-125" />
             <span className="display-header text-xl md:text-2xl font-bold tracking-tight text-light-cream">
-              takeback.in
+              Takeback
             </span>
           </button>
 
@@ -49,13 +53,30 @@ export function Header({ currentRoute, setRoute }) {
           </nav>
 
           {/* Desktop Right Action */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
             <MagneticButton 
               className="px-5 py-2.5 bg-mint hover:bg-mint/95 text-deep-ink font-semibold rounded-lg text-xs tracking-wider uppercase font-sans border-none cursor-pointer"
               onClick={() => setRoute('/borrow')}
             >
               Scan to Borrow
             </MagneticButton>
+            {currentUser ? (
+              <button
+                onClick={onSignOut}
+                className="px-4 py-2 border border-white/20 hover:border-white/50 text-white/80 hover:text-white rounded-lg text-xs font-mono bg-transparent cursor-pointer spring-transition uppercase"
+                style={{ minHeight: '38px', display: 'inline-flex', alignItems: 'center' }}
+              >
+                Sign Out
+              </button>
+            ) : (
+              <button
+                onClick={onLoginClick}
+                className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-mono border border-white/10 cursor-pointer spring-transition uppercase"
+                style={{ minHeight: '38px', display: 'inline-flex', alignItems: 'center' }}
+              >
+                Login
+              </button>
+            )}
           </div>
 
           {/* Mobile Hamburger Menu */}
@@ -129,7 +150,7 @@ export function Header({ currentRoute, setRoute }) {
             </nav>
           </div>
 
-          <div>
+          <div className="flex flex-col gap-3">
             <button
               onClick={() => {
                 setRoute('/borrow');
@@ -139,6 +160,27 @@ export function Header({ currentRoute, setRoute }) {
             >
               Scan to Borrow
             </button>
+            {currentUser ? (
+              <button
+                onClick={() => {
+                  onSignOut();
+                  setIsOpen(false);
+                }}
+                className="w-full py-2.5 border border-white/20 hover:border-white/40 text-white font-medium rounded-lg text-xs font-mono bg-transparent cursor-pointer spring-transition uppercase"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  onLoginClick();
+                  setIsOpen(false);
+                }}
+                className="w-full py-2.5 bg-white/10 hover:bg-white/15 text-white font-medium rounded-lg text-xs font-mono border border-white/10 cursor-pointer spring-transition uppercase"
+              >
+                Login / Register
+              </button>
+            )}
           </div>
         </aside>
       </div>

@@ -11,7 +11,7 @@ export function Hero({ setRoute }) {
   const containerRef = useRef(null);
 
   // Split-text logic for staggered reveal: group chars into words to prevent awkward text wrapping on mobile
-  const titleText = "EVERY CUP BORROWED, ONE LESS CUP BINNED.";
+  const titleText = "MAKING SUSTAINABILITY REWARDING.";
   const words = titleText.split(" ");
   const chars = words.map((word, wordIndex) => (
     <span key={wordIndex} className="inline-block whitespace-nowrap">
@@ -107,7 +107,7 @@ export function Hero({ setRoute }) {
 
           {/* Hero Subtext */}
           <p className="hero-fade-in interface-text text-base md:text-lg text-light-cream/90 max-w-xl text-center leading-[1.60] mt-2">
-            A reusable cup company encouraging everyone to say no to single-use cups, one refill at a time.
+            Empowering cafes and conscious drinkers through a smart borrow-and-return system. Say goodbye to single-use packaging and earn rewards, one circular cycle at a time.
           </p>
 
           {/* Multi-button action layout */}

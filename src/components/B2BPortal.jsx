@@ -17,6 +17,8 @@ export function B2BPortal() {
     acceptedTerms: false
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
 
   // ROI computations
   const annualSingleUseCount = dailyVolume * 365;
@@ -45,24 +47,66 @@ export function B2BPortal() {
     }));
   };
 
-  const handleIntakeSubmit = (e) => {
+  const handleIntakeSubmit = async (e) => {
     e.preventDefault();
+    setSubmissionError('');
+
+    // Client-side Validation Checks
     if (!formData.acceptedTerms) {
       alert("Please accept the compliance terms to proceed.");
       return;
     }
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        contactName: '',
-        brandTitle: '',
-        city: 'Bangalore',
-        outlets: '1',
-        contactEmail: '',
-        acceptedTerms: false
+    if (!formData.contactName.trim()) {
+      alert("Contact Name is required.");
+      return;
+    }
+    if (!formData.brandTitle.trim()) {
+      alert("Café Brand Name and Title are required.");
+      return;
+    }
+    if (!formData.contactEmail.trim() || !formData.contactEmail.indexOf('@') <= 0) {
+      alert("Please enter a valid business email address.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/partners', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 4000);
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitted(true);
+        setFormData({
+          contactName: '',
+          brandTitle: '',
+          city: 'Bangalore',
+          outlets: '1',
+          contactEmail: '',
+          acceptedTerms: false
+        });
+        // Reset success state after 4 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 4000);
+      } else {
+        setSubmissionError(result.message || 'Submission failed.');
+        alert(`Error: ${result.message || 'Intake submission failed.'}`);
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      setSubmissionError('API network connectivity error.');
+      alert('Unable to contact the backend intake server. Please verify database availability.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const partners = [
@@ -422,12 +466,17 @@ export function B2BPortal() {
                 </div>
 
                 {/* TODO: confirm with founder */}
-                <MagneticButton 
+                 <MagneticButton 
                   type="submit"
-                  className="w-full py-3 bg-[#A3E2C9] hover:bg-[#A3E2C9]/90 text-[#0B0F12] font-bold rounded-lg text-xs uppercase tracking-wider font-sans focus-visible:outline-none mt-2 spring-transition border-none cursor-pointer"
+                  disabled={isSubmitting}
+                  className={`w-full py-3 text-[#0B0F12] font-bold rounded-lg text-xs uppercase tracking-wider font-sans focus-visible:outline-none mt-2 spring-transition border-none ${
+                    isSubmitting 
+                      ? 'bg-[#A3E2C9]/50 cursor-wait' 
+                      : 'bg-[#A3E2C9] hover:bg-[#A3E2C9]/90 cursor-pointer'
+                  }`}
                   style={{ minHeight: '48px' }}
                 >
-                  Send Inquiry & Request Pricing
+                  {isSubmitting ? 'Sending Intake Inquiry...' : 'Send Inquiry & Request Pricing'}
                 </MagneticButton>
 
                 {/* B2B response commitment label */}

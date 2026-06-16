@@ -132,7 +132,7 @@ export function PWADemo() {
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
                   <span className="display-header text-sm font-bold text-light-cream tracking-tight">
-                    takeback.in
+                    Takeback
                   </span>
                 </div>
                 <span className="text-[9px] px-1.5 py-0.5 border border-white/20 rounded-full text-white/40 font-mono">

@@ -40,7 +40,7 @@ export function Footer({ setRoute }) {
   return (
     <footer 
       id="global-system-footer"
-      className="relative z-[100] bg-[#0B0F12] text-light-cream border-t border-white/10 pt-16 pb-8"
+      className="relative z-10 bg-[#0B0F12] text-light-cream border-t border-white/10 pt-16 pb-8"
     >
       <div className="max-w-[1440px] mx-auto px-5 lg:px-20 flex flex-col gap-12">
         
@@ -158,7 +158,7 @@ export function Footer({ setRoute }) {
 
           {/* Legal / Copyright details */}
           <div className="flex flex-col md:items-end gap-1.5 text-center md:text-right">
-            <span>© {new Date().getFullYear()} TAKEBACK.IN • ZERO WASTE NETWORK</span>
+            <span>© {new Date().getFullYear()} TAKEBACK • ZERO WASTE NETWORK</span>
             <div className="flex gap-4 justify-center md:justify-end">
               <a href="#" className="hover:text-mint transition-colors">Privacy Policy</a>
               <span>•</span>

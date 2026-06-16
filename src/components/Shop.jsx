@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MagneticButton from './MagneticButton';
+import PaymentModal from './PaymentModal';
 
-// Import color variant images
+// Import color variant images and assets
 import forestCup from '../assets/product_card_forest.png';
 import terracottaCup from '../assets/product_card_terracotta.png';
 import boneCup from '../assets/product_card_bone.png';
 import midnightCup from '../assets/product_card_midnight.png';
+import bundleCupsPack from '../assets/bundle_cups_pack.png';
+import corporateCafeKit from '../assets/corporate_cafe_kit.png';
 
 const cupImages = {
   Forest: forestCup,
@@ -16,6 +19,21 @@ const cupImages = {
 
 
 export function Shop({ activeVariant, onColorwayChange }) {
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handlePurchaseClick = (prod) => {
+    // Parse numeric price out of string (e.g. "₹ 499.00" -> 499)
+    const amount = parseFloat(prod.price.replace(/[^\d.]/g, ''));
+    setSelectedProduct({ ...prod, numericPrice: amount });
+    setIsPaymentOpen(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setIsPaymentOpen(false);
+    alert(`Success! You have purchased: ${selectedProduct.name}.`);
+  };
+
   const products = [
     {
       id: 'vessel-single',
@@ -82,18 +100,20 @@ export function Shop({ activeVariant, onColorwayChange }) {
                   </span>
                 </div>
 
-                {/* Shading/Illustration box */}
-                <div className="w-full h-40 rounded-xl bg-black/5 border border-black/5 flex items-center justify-center relative overflow-hidden">
+                 {/* Shading/Illustration box */}
+                <div className="w-full h-40 rounded-xl bg-black/5 border border-black/5 flex items-center justify-center relative overflow-hidden p-4">
                   {prod.isConfiguratorLink ? (
-                    <div className="text-center flex flex-col gap-1 p-4 pointer-events-none select-none">
-                      <span className="text-[10px] font-mono uppercase text-black/40">// active configurator viewport</span>
-                      <span className="text-xs font-bold text-[#1A2E22] group-hover:scale-105 transition-transform">Customize Colors Below</span>
-                    </div>
+                    <img 
+                      src={cupImages[activeVariant.name] || forestCup} 
+                      alt={prod.name} 
+                      className="h-full object-contain filter drop-shadow-sm transition-all duration-300 group-hover:scale-105"
+                    />
                   ) : (
-                    <div className="w-16 h-24 border border-[#1A2E22]/30 rounded flex flex-col justify-between p-2 opacity-55">
-                      <div className="w-full h-1 bg-[#1A2E22]/20 rounded" />
-                      <div className="w-full h-1 bg-[#1A2E22]/20 rounded mt-auto" />
-                    </div>
+                    <img 
+                      src={prod.id === 'vessel-bundle' ? bundleCupsPack : corporateCafeKit} 
+                      alt={prod.name} 
+                      className="h-full w-full object-cover rounded-lg transition-all duration-300 group-hover:scale-105"
+                    />
                   )}
                 </div>
 
@@ -119,8 +139,8 @@ export function Shop({ activeVariant, onColorwayChange }) {
                 </div>
                 
                 <MagneticButton 
-                  onClick={() => alert(`Purchasing ${prod.name}!`)}
-                  className="w-full py-2.5 bg-[#0B0F12] text-light-cream hover:bg-[#1E252B] rounded-lg text-xs font-bold uppercase tracking-wider font-sans focus-visible:outline-none"
+                  onClick={() => handlePurchaseClick(prod)}
+                  className="w-full py-2.5 bg-[#0B0F12] text-light-cream hover:bg-[#1E252B] rounded-lg text-xs font-bold uppercase tracking-wider font-sans focus-visible:outline-none cursor-pointer border-none"
                 >
                   Purchase Vessel
                 </MagneticButton>
@@ -188,6 +208,16 @@ export function Shop({ activeVariant, onColorwayChange }) {
         </div>
 
       </div>
+
+      {selectedProduct && (
+        <PaymentModal
+          isOpen={isPaymentOpen}
+          onClose={() => setIsPaymentOpen(false)}
+          amount={selectedProduct.numericPrice}
+          itemName={selectedProduct.name}
+          onSuccess={handlePaymentSuccess}
+        />
+      )}
     </section>
   );
 }

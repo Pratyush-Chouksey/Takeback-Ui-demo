@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import BottomNav from './components/BottomNav';
 
-// 7 Page Components
+// Page Components
 import Homepage from './components/Homepage';
 import Borrow from './components/Borrow';
 import ReturnMap from './components/ReturnMap';
@@ -18,11 +18,19 @@ import AccountWallet from './components/AccountWallet';
 import About from './components/About';
 import JournalFeed from './components/JournalFeed';
 
+// Dynamic Sub-Systems
+import LoginModal from './components/LoginModal';
+import CupDetails from './components/CupDetails';
+import AdminDashboard from './components/AdminDashboard';
+
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [currentRoute, setRoute] = useState('/');
+  const [currentRoute, setRouteState] = useState(window.location.pathname || '/');
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authToken, setAuthToken] = useState(localStorage.getItem('takeback_token') || null);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   
   // 1. Variant Colorway State for Configurator integration
   const [activeVariant, setActiveVariant] = useState({
@@ -42,7 +50,56 @@ function App() {
   const ringsRef = useRef([]);
   const isAnimatingRef = useRef(false);
 
+  const setRoute = (route) => {
+    window.history.pushState({}, '', route);
+    setRouteState(route);
+  };
 
+  useEffect(() => {
+    const handlePopState = () => {
+      setRouteState(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const fetchUserProfile = async (token) => {
+    try {
+      const response = await fetch('/api/auth/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setCurrentUser(data.user);
+      } else {
+        localStorage.removeItem('takeback_token');
+        setAuthToken(null);
+        setCurrentUser(null);
+      }
+    } catch (err) {
+      console.error("Failed to fetch user profile:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (authToken) {
+      fetchUserProfile(authToken);
+    }
+  }, [authToken]);
+
+  const handleAuthSuccess = (user, token) => {
+    setCurrentUser(user);
+    setAuthToken(token);
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem('takeback_token');
+    setAuthToken(null);
+    setCurrentUser(null);
+    setRoute('/');
+  };
 
   // 6. Geolocation checks and prefers-reduced-motion check
   useEffect(() => {
@@ -167,17 +224,19 @@ function App() {
     }
   };
 
-
-
   return (
     <div className="relative min-h-screen bg-deep-ink text-light-cream selection:bg-mint selection:text-deep-ink">
       {/* 1. Global Noise Layer */}
       <div className="global-noise-layer" />
 
       {/* 2. Global Header Navigation (z-1000) */}
-      <Header currentRoute={currentRoute} setRoute={setRoute} />
-
-
+      <Header 
+        currentRoute={currentRoute} 
+        setRoute={setRoute} 
+        currentUser={currentUser}
+        onSignOut={handleSignOut}
+        onLoginClick={() => setIsLoginOpen(true)}
+      />
 
       {/* 4. Global Payout/Scan Rewards FX Layer Canvas (z-4000) */}
       <canvas 
@@ -187,9 +246,9 @@ function App() {
       />
 
       {/* 5. Main Routed Screen Viewports */}
-      <main className="relative z-100">
+      <main className="relative z-[20]">
         {currentRoute === '/' && <Homepage activeVariant={activeVariant} onColorwayChange={setActiveVariant} setRoute={setRoute} />}
-        {currentRoute === '/borrow' && <Borrow triggerReward={triggerReward} />}
+        {currentRoute === '/borrow' && <Borrow triggerReward={triggerReward} setRoute={setRoute} />}
         {currentRoute === '/return' && <ReturnMap triggerReward={triggerReward} />}
         {currentRoute === '/shop' && (
           <Shop 
@@ -203,16 +262,45 @@ function App() {
         {currentRoute === '/for-cafes' && <B2BPortal />}
         {currentRoute === '/about' && <About />}
         {currentRoute === '/journal' && <JournalFeed />}
-        {currentRoute === '/account' && <AccountWallet triggerReward={triggerReward} />}
+        {currentRoute === '/account' && (
+          <AccountWallet 
+            triggerReward={triggerReward} 
+            authToken={authToken}
+            currentUser={currentUser}
+            onLoginClick={() => setIsLoginOpen(true)}
+          />
+        )}
+        {currentRoute.startsWith('/cup/') && (
+          <CupDetails 
+            cupId={currentRoute.substring(5)}
+            currentUser={currentUser}
+            authToken={authToken}
+            onLoginClick={() => setIsLoginOpen(true)}
+            triggerReward={triggerReward}
+            setRoute={setRoute}
+          />
+        )}
+        {currentRoute === '/admin' && (
+          <AdminDashboard 
+            currentUser={currentUser}
+            authToken={authToken}
+            setRoute={setRoute}
+          />
+        )}
       </main>
-
-
 
       {/* 7. Global system Footer directories (z-100) */}
       <Footer setRoute={setRoute} />
 
       {/* 8. Mobile floating bottom tab navigation (z-5000) */}
       <BottomNav currentRoute={currentRoute} setRoute={setRoute} />
+
+      {/* 9. Access Gateway Login Modal */}
+      <LoginModal 
+        isOpen={isLoginOpen} 
+        onClose={() => setIsLoginOpen(false)} 
+        onAuthSuccess={handleAuthSuccess} 
+      />
     </div>
   );
 }

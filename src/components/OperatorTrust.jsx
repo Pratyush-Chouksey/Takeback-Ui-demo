@@ -197,7 +197,7 @@ export function OperatorTrust() {
       <div className="layout-grid pt-4 border-t border-black/5">
         <div className="col-span-4 lg:col-span-12 flex justify-between items-center text-[10px] font-mono text-black/40">
           <span>// TRUST ARCHITECTURE ENFORCED</span>
-          <span>TAKEBACK.IN / NETWORK</span>
+          <span>TAKEBACK / NETWORK</span>
         </div>
       </div>
     </section>
