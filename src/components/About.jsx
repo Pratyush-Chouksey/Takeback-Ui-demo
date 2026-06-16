@@ -33,7 +33,7 @@ export function About() {
             OUR STORY SO FAR.
           </h1>
           <p className="interface-text text-lg text-[#0B0F12]/70 font-semibold italic border-l-4 border-[#A3E2C9] pl-4 py-1 leading-relaxed">
-            Eliminating single-use cups across India through a community-powered share loop.
+            Eliminating single-use cups across the country through a share loop.
           </p>
         </div>
 
@@ -84,11 +84,11 @@ export function About() {
           
           <div className="interface-text text-base md:text-[17px] text-[#0B0F12]/80 leading-[1.60] space-y-6">
             <p>
-              It all started on a crisp morning at my local beach in Goa back in 2024. I was sitting on the sand, watching the surf roll in, cradling my morning flat white or tea. It’s a ritual that millions of us share—a moment of quiet pause before the day begins, fueled by the rich, comforting warmth of a good brew. But as the sun climbed higher, I noticed something else dotting the shoreline. Tucked into the rocks and half-buried in the sand were paper takeaway cups. Dozens of them. That morning, the magic of my daily ritual was broken by a stark reality: our love for daily drinks was leaving a devastating mark on the places we cherish most.
+              It all started with a simple observation of a daily ritual. Every morning, millions of us grab our favorite warm drink—a coffee, a tea, a comforting brew that fuels our day. It’s a moment of quiet pause before the rush begins. But look closer at any café trash bin or city street corner, and a stark reality emerges. Tucked into corners, overflowing from waste baskets, and littering our public spaces are paper takeaway cups. Dozens of them, discarded in seconds but remaining on our planet for centuries.
             </p>
             
             <p>
-              When I looked into the numbers, the scale of the issue blew me away. In India alone, we go through over one billion single-use cups every single year. Most people believe these cups are harmlessly composted or recycled, but the reality is far more challenging. Almost all takeaway cups are lined with a thin, heat-bonded polyethylene plastic film to keep them waterproof. Because of this laminate, they cannot be recycled through standard facilities, meaning nearly every single cup ended up in a landfill or scattered across our coastlines and bushlands.
+              When we looked into the numbers, the scale of the issue was staggering. We go through billions of single-use cups every year. Most people believe these cups are harmlessly composted or recycled, but the reality is far more challenging. Almost all takeaway cups are lined with a thin, heat-bonded plastic film to keep them waterproof. Because of this laminate, they cannot be recycled through standard facilities, meaning nearly every single cup ended up in a landfill or scattered across our natural landscapes.
             </p>
             
             <p className="border-l-2 border-[#0B0F12] pl-6 py-2 my-8 font-serif text-xl md:text-2xl font-semibold italic text-[#0B0F12]/90">
@@ -96,19 +96,19 @@ export function About() {
             </p>
 
             <p>
-              I knew we couldn't go on like this, but I also knew that asking everyone to carry reusable cups everywhere wasn't working. Life gets busy, we forget our flasks in the car, or we decide on a drink spur of the moment. We didn't need to change people's love for daily drinks; we needed to change the system around it. That’s how the idea for TakeBack was born. I wanted to build a simple, circular network where a reusable cup could be borrowed at one cafe and returned at any other, making reuse the absolute easiest choice for every Indian.
+              I knew we couldn't go on like this, but I also knew that asking everyone to carry reusable cups everywhere wasn't working. Life gets busy, we forget our flasks at home, or we decide on a drink spur of the moment. We didn't need to change people's love for daily drinks; we needed to change the system around it. That’s how the idea for TakeBack was born. I wanted to build a simple, circular network where a reusable cup could be borrowed at one cafe and returned at any other, making reuse the absolute easiest choice for everyone.
             </p>
             
             <p>
-              We gathered a passionate team of local designers, material scientists, and cafe owners. We spent months sketching, testing, and refining. We wanted a cup that felt amazing to hold, insulated the drinks beautifully, and stood up to the rigors of daily washing. The result was our signature husk vessel—crafted from upcycled coffee husks that would otherwise go to waste, combined with food-grade circular poly-composites. It is beautiful, durable, and designed to circulate for 150 washes.
+              We gathered a passionate team of local designers, material scientists, and cafe owners. We spent months sketching, testing, and refining. We wanted a cup that felt amazing to hold, insulated the drinks beautifully, and stood up to the rigors of daily washing. The result was our signature vessel—crafted from upcycled organic materials combined with food-grade circular poly-composites. It is beautiful, durable, and designed to circulate for hundreds of washes.
             </p>
             
             <p>
-              But a great cup is only half the loop. We engineered a seamless, connected system of partnered café drop points. By placing these return counters at neighborhood cafes, campus hubs, and transit stations, we’ve created a frictionless network. A quick scan of the base QR code registers your cup, and returning it takes just seconds, rewarding you with ₹15 cashback directly to your wallet. It's a self-sustaining ecosystem built on community, trust, and shared responsibility.
+              But a great cup is only half the loop. We engineered a seamless, connected system of partnered café drop points. By placing these return counters at neighborhood cafes, campus hubs, and transit stations, we’ve created a frictionless network. A quick scan of the qr code registers your cup, and returning it takes just seconds, rewarding you with cashback directly to your wallet. It's a self-sustaining ecosystem built on community, trust, and shared responsibility.
             </p>
             
             <p>
-              From our humble beginnings in a single coastal cafe, TakeBack has grown into a thriving network of over 140 nodes across India's capital cities and regional hubs. We’re incredibly proud to partner with legendary roasters and local cafes who share our vision of a clean, circular future. For us, TakeBack isn’t about compromising on convenience or guilt-tripping drinkers; it's about celebrating our incredible beverage culture while keeping India’s beautiful landscapes clean for generations to come. Every cup borrowed is one less cup binned, and together, we are closing the loop on waste.
+              From our humble beginnings, TakeBack has grown into a thriving network of nodes across multiple cities and regional hubs. We’re incredibly proud to partner with local cafes who share our vision of a clean, circular future. For us, TakeBack isn’t about compromising on convenience or guilt-tripping drinkers; it's about celebrating our incredible beverage culture while keeping our beautiful landscapes clean for generations to come. Every cup borrowed is one less cup binned, and together, we are closing the loop on waste.
             </p>
 
             <p className="border-t border-black/10 pt-6 mt-6 text-sm text-[#0B0F12]/75">
@@ -121,7 +121,7 @@ export function About() {
             <div className="flex flex-col">
               <span className="text-[10px] font-mono text-black/40 uppercase">DOCUMENT COMPILED BY</span>
               <span className="text-sm font-bold text-[#0B0F12] font-serif">TakeBack Founders & Labs</span>
-              <span className="text-xs text-black/50 font-mono">June 2026 // Goa</span>
+              <span className="text-xs text-black/50 font-mono">June 2026</span>
             </div>
             
             <div className="flex gap-3">

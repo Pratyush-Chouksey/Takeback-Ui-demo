@@ -23,8 +23,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [currentRoute, setRoute] = useState('/');
-  const [springActive, setSpringActive] = useState(false);
-  const [activeTab, setActiveTab] = useState('tokens');
   
   // 1. Variant Colorway State for Configurator integration
   const [activeVariant, setActiveVariant] = useState({
@@ -44,12 +42,7 @@ function App() {
   const ringsRef = useRef([]);
   const isAnimatingRef = useRef(false);
 
-  // 5. Technical figures for the Design Tokens Matrix
-  const figures = [
-    { label: 'Network Active Nodes', value: '142 outlets', change: '+12 new' },
-    { label: 'Weekly Return Rate', value: '94.2%', change: '+0.5% rate' },
-    { label: 'System Carbon Savings', value: '41,392 kg', change: '+4.2 kg today' }
-  ];
+
 
   // 6. Geolocation checks and prefers-reduced-motion check
   useEffect(() => {
@@ -174,246 +167,7 @@ function App() {
     }
   };
 
-  // Foundational Workspace for demonstrating tokens (Rendered only on homepage)
-  const renderFoundationalWorkspace = () => {
-    return (
-      <section className="relative z-[100] bg-[#1E252B] py-24 border-t border-white/5 spring-transition">
-        <div className="layout-grid">
-          
-          {/* Section Heading */}
-          <div className="col-span-4 lg:col-span-12 mb-12 border-b border-white/10 pb-6">
-            <span className="text-xs font-mono uppercase text-gold-amber tracking-wider font-semibold">
-              FOUNDATIONAL MATRIX
-            </span>
-            <h2 className="display-header text-3xl md:text-5xl font-bold mt-2 text-light-cream">
-              Design Tokens Matrix
-            </h2>
-            <p className="interface-text text-sm md:text-base text-white/60 mt-2">
-              Inspect the visual variables, layouts, and spring parameters applied across the circular codebase.
-            </p>
-          </div>
 
-          {/* Controls tabs */}
-          <div className="col-span-4 lg:col-span-12 flex gap-2 mb-6 border-b border-white/5 pb-4">
-            {['tokens', 'layout', 'typography'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded text-sm font-sans tracking-wide uppercase transition-all focus-visible:outline-none bg-transparent border-none cursor-pointer ${
-                  activeTab === tab
-                    ? 'text-mint border-b-2 border-mint font-semibold'
-                    : 'text-white/40 hover:text-white/80'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-
-          {/* TAB 1: DESIGN TOKENS MATRIX */}
-          {activeTab === 'tokens' && (
-            <>
-              {/* Palette */}
-              <div className="col-span-4 lg:col-span-6 flex flex-col gap-4">
-                <h3 className="display-header text-xl md:text-2xl font-bold text-light-cream">
-                  Color Token Palette
-                </h3>
-                <p className="interface-text text-sm text-white/55">
-                  Core palette system mapped via Tailwind utility interfaces back to root custom properties.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-deep-ink border border-white/10">
-                    <div className="w-8 h-8 rounded bg-deep-ink border border-white/20 mb-2" />
-                    <div className="text-xs font-mono text-white/50">--color-bg-deep-ink</div>
-                    <div className="text-sm font-semibold text-light-cream">#0B0F12</div>
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted-slate border border-white/10">
-                    <div className="w-8 h-8 rounded bg-[#1E252B] mb-2" />
-                    <div className="text-xs font-mono text-white/50">--color-muted-slate</div>
-                    <div className="text-sm font-semibold text-light-cream">#1E252B</div>
-                  </div>
-                  <div className="p-4 rounded-lg bg-forest-green border border-white/10">
-                    <div className="w-8 h-8 rounded bg-[#1A2E22] mb-2" />
-                    <div className="text-xs font-mono text-white/50">--color-forest-green</div>
-                    <div className="text-sm font-semibold text-light-cream">#1A2E22</div>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <div className="w-8 h-8 rounded bg-[#A3E2C9] mb-2" />
-                    <div className="text-xs font-mono text-white/50">--color-mint</div>
-                    <div className="text-sm font-semibold text-[#A3E2C9]">#A3E2C9</div>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <div className="w-8 h-8 rounded bg-[#F5B973] mb-2" />
-                    <div className="text-xs font-mono text-white/50">--color-gold-amber</div>
-                    <div className="text-sm font-semibold text-[#F5B973]">#F5B973</div>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <div className="w-8 h-8 rounded bg-[#F7F5F0] mb-2" />
-                    <div className="text-xs font-mono text-white/50">--color-fg-light-cream</div>
-                    <div className="text-sm font-semibold text-deep-ink bg-light-cream px-1 rounded inline-block">#F7F5F0</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Glassmorphism & Spring Animations */}
-              <div className="col-span-4 lg:col-span-6 flex flex-col gap-4">
-                <h3 className="display-header text-xl md:text-2xl font-bold text-light-cream">
-                  Glassmorphism & Spring Mechanics
-                </h3>
-                <p className="interface-text text-sm text-white/55">
-                  Components apply transparency overlay specifications paired with customized stiffness metrics.
-                </p>
-                <div className="glass-panel p-6 rounded-xl spring-transition hover:-translate-y-1 hover:scale-[1.02] cursor-pointer border border-white/10">
-                  <h4 className="display-header text-lg font-bold text-mint mb-2">Glass Panel Class</h4>
-                  <p className="interface-text text-xs text-white/70 leading-relaxed">
-                    background: rgba(26, 37, 43, 0.45); backdrop-filter: blur(24px) saturate(140%); border: 1px solid rgba(255, 255, 255, 0.08);
-                  </p>
-                </div>
-
-                <div 
-                  onClick={() => setSpringActive(!springActive)}
-                  className={`glass-panel p-6 rounded-xl cursor-pointer border spring-transition ${
-                    springActive ? 'border-gold-amber scale-105 shadow-lg shadow-gold-amber/10' : 'border-white/10'
-                  }`}
-                >
-                  <h4 className="display-header text-lg font-bold text-gold-amber mb-2">
-                    Spring Settings
-                  </h4>
-                  <p className="interface-text text-xs text-white/70 leading-relaxed mb-4">
-                    Stiffness: 95 | Damping: 14 | Mass: 1. Click to trigger animation.
-                  </p>
-                  <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden">
-                    <div 
-                      className="bg-[#F5B973] h-full spring-transition" 
-                      style={{ width: springActive ? '100%' : '15%' }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* TAB 2: VARIABLE GRID SYSTEM */}
-          {activeTab === 'layout' && (
-            <div className="col-span-4 lg:col-span-12 flex flex-col gap-6">
-              <div>
-                <h3 className="display-header text-xl md:text-2xl font-bold text-light-cream mb-2">
-                  Responsive Fluid Grid Check
-                </h3>
-                <p className="interface-text text-sm text-white/55 max-w-xl">
-                  Inspect the layout structure. In desktop (≥1024px), the layout extends up to 1440px max-width, allocating 12 columns, 24px gutters, and 80px fluid page margins. Mobile structures down to 4 columns.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-4 lg:grid-cols-12 gap-4 lg:gap-6 bg-white/5 p-4 rounded-lg border border-white/10">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div 
-                    key={i} 
-                    className={`h-16 rounded bg-[#A3E2C9]/10 border border-[#A3E2C9]/20 flex items-center justify-center font-mono text-xs text-mint ${
-                      i >= 4 ? 'hidden lg:flex' : 'flex'
-                    }`}
-                  >
-                    col {i + 1}
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 bg-deep-ink rounded-lg border border-white/5">
-                  <div className="text-xs text-white/45 uppercase font-semibold">Tiers Blueprint</div>
-                  <div className="text-lg font-bold text-light-cream mt-1 font-mono">z-axis stack</div>
-                  <ul className="text-xs text-white/60 space-y-1 mt-2 font-mono">
-                    <li>Base Canvas = z-0</li>
-                    <li>Content Layer = z-100</li>
-                    <li>Global HUD/Nav = z-1000</li>
-                    <li>3D Canvas Layer = z-3000</li>
-                    <li>Modal Sheet Layer = z-5000</li>
-                  </ul>
-                </div>
-
-                <div className="p-4 bg-deep-ink rounded-lg border border-white/5">
-                  <div className="text-xs text-white/45 uppercase font-semibold">Desktop Grid Structure</div>
-                  <div className="text-lg font-bold text-light-cream mt-1 font-mono">1440px Limit</div>
-                  <ul className="text-xs text-white/60 space-y-1 mt-2 font-mono">
-                    <li>Columns: 12</li>
-                    <li>Margins: 80px (fluid)</li>
-                    <li>Gutters: 24px</li>
-                  </ul>
-                </div>
-
-                <div className="p-4 bg-deep-ink rounded-lg border border-white/5">
-                  <div className="text-xs text-white/45 uppercase font-semibold">Mobile Grid Structure</div>
-                  <div className="text-lg font-bold text-light-cream mt-1 font-mono">390px Viewport</div>
-                  <ul className="text-xs text-white/60 space-y-1 mt-2 font-mono">
-                    <li>Columns: 4</li>
-                    <li>Margins: 20px</li>
-                    <li>Gutters: 16px</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 3: TYPOGRAPHY SYSTEM */}
-          {activeTab === 'typography' && (
-            <>
-              <div className="col-span-4 lg:col-span-6 flex flex-col gap-4">
-                <h3 className="display-header text-xl md:text-2xl font-bold text-light-cream">
-                  Serif Display Headers
-                </h3>
-                <p className="interface-text text-sm text-white/55">
-                  Brand headers load Serif Georgia, setting exact tracking: -0.03em and leading: 105%.
-                </p>
-                <div className="p-6 bg-deep-ink rounded-lg border border-white/5 space-y-4">
-                  <h1 className="display-header text-4xl font-bold text-light-cream">
-                    Heading Level 1
-                  </h1>
-                  <h2 className="display-header text-3xl font-bold text-light-cream">
-                    Heading Level 2
-                  </h2>
-                  <h3 className="display-header text-2xl font-bold text-light-cream">
-                    Heading Level 3
-                  </h3>
-                </div>
-              </div>
-
-              <div className="col-span-4 lg:col-span-6 flex flex-col gap-4">
-                <h3 className="display-header text-xl md:text-2xl font-bold text-light-cream">
-                  Functional Sans & Numbers
-                </h3>
-                <p className="interface-text text-sm text-white/55">
-                  Inter fallback font layout, line-height 160%, with tabular figures alignment for layout safety.
-                </p>
-                <div className="p-6 bg-deep-ink rounded-lg border border-white/5 space-y-6">
-                  <div>
-                    <span className="text-xs text-mint uppercase font-semibold tracking-wider font-mono">Interface Regular</span>
-                    <p className="interface-text text-sm text-white/80 leading-[1.60] mt-1">
-                      This interface text demonstrates the default Geometric Grotesque Sans-Serif font settings. Perfect spacing resolves styling metrics efficiently.
-                    </p>
-                  </div>
-                  <div>
-                    <span className="text-xs text-[#F5B973] uppercase font-semibold tracking-wider font-mono">Technical Figures</span>
-                    <div className="mt-2 space-y-2">
-                      {figures.map((fig, idx) => (
-                        <div key={idx} className="flex justify-between items-center border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                          <span className="text-xs text-white/60">{fig.label}</span>
-                          <div className="flex gap-3 font-mono text-sm">
-                            <span className="technical-figures text-light-cream font-medium">{fig.value}</span>
-                            <span className={`technical-figures ${fig.change.startsWith('+') ? 'text-mint' : 'text-red-400'}`}>{fig.change}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-
-        </div>
-      </section>
-    );
-  };
 
   return (
     <div className="relative min-h-screen bg-deep-ink text-light-cream selection:bg-mint selection:text-deep-ink">
@@ -452,8 +206,7 @@ function App() {
         {currentRoute === '/account' && <AccountWallet triggerReward={triggerReward} />}
       </main>
 
-      {/* 6. Foundational Matrix Details (Only visible on Homepage) */}
-      {currentRoute === '/' && renderFoundationalWorkspace()}
+
 
       {/* 7. Global system Footer directories (z-100) */}
       <Footer setRoute={setRoute} />

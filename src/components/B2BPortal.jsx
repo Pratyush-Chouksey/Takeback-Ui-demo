@@ -67,27 +67,27 @@ export function B2BPortal() {
 
   const partners = [
     {
-      name: 'Third Wave Coffee Co.',
+      name: 'Cafe 1',
       nodes: '14 Urban Hub Nodes',
-      region: 'Bengaluru Core',
+      region: 'Location 1',
       accent: 'border-mint/20'
     },
     {
-      name: 'Blue Tokai Coffee Roasters',
+      name: 'Cafe 2',
       nodes: '22 Metro Nodes',
-      region: 'Mumbai/Delhi Capital Region',
+      region: 'Location 2',
       accent: 'border-gold-amber/20'
     },
     {
-      name: 'Subko Coffee Roasters',
+      name: 'Cafe 3',
       nodes: '6 Specialty Nodes',
-      region: 'Bandra/Colaba Districts',
+      region: 'Location 3',
       accent: 'border-white/10'
     },
     {
-      name: 'Araku Coffee',
+      name: 'Cafe 4',
       nodes: '2 flagship Heritage Nodes',
-      region: 'Indiranagar Hub',
+      region: 'Location 4',
       accent: 'border-mint/20'
     }
   ];

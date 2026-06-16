@@ -58,7 +58,7 @@ export function SystemLoop() {
       step: 'Step 01: Borrow (Scan Base QR Code)',
       description: "Find a participating café, scan the cup's QR code at any partnered café to instantly check it out.",
       feature: (
-        <div className="mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col items-center gap-3">
+        <div className="mt-4 md:mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col items-center gap-3">
           {/* How It Works Icon 1: QR scan icon (assets/icon_qr_scan.png) */}
           <div className="w-20 h-20 bg-black/10 border border-dashed border-black/30 rounded flex items-center justify-center relative overflow-hidden">
             {/* Visual QR Simulator */}
@@ -84,20 +84,18 @@ export function SystemLoop() {
       step: 'Step 02: Use (Insulated Husk Vessel)',
       description: "Enjoy your hot or cold beverages in our insulated husk composite vessel.",
       feature: (
-        <div className="mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col gap-2 font-mono text-xs">
-          {/* How It Works Icon 2: Cup icon (assets/icon_cup.png) */}
-          {/* How It Works Icon 3: Café icon (assets/icon_cafe.png) */}
+        <div className="mt-4 md:mt-6 p-4 rounded-lg bg-black/5 border border-black/10 flex flex-col gap-2 font-mono text-xs">
           <div className="flex justify-between border-b border-black/10 pb-1.5">
-            <span className="text-black/50">THERMAL LOCK:</span>
-            <span className="font-semibold text-black/95">Double-wall structural lock thermal shield</span>
+            <span className="text-black/50">VESSEL PROPERTIES:</span>
+            <span className="font-semibold text-black/95">-</span>
           </div>
           <div className="flex justify-between border-b border-black/10 pb-1.5">
-            <span className="text-black/50">INSULATION:</span>
-            <span className="font-semibold text-black/95">4 Hours Hot / Cold</span>
+            <span className="text-black/50">DATA COLLECTED:</span>
+            <span className="font-semibold text-black/95">Cup ID, Location, Timestamp</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-black/50">DESIGN:</span>
-            <span className="font-semibold text-black/95">Fluted Heat Ridges</span>
+            <span className="text-black/50">TRANSACTION DATA:</span>
+            <span className="font-semibold text-black/95">User Wallet, Deposit Status</span>
           </div>
         </div>
       )
@@ -107,7 +105,7 @@ export function SystemLoop() {
       step: 'Step 03: Return (Drop Bin Node & Earn ₹15 Cashback)',
       description: "Once finished, return the empty cup to any partnered café drop point in our network. A staff member or scanner registers the return, instantly refunding your deposit to your digital wallet.",
       feature: (
-        <div className="mt-6 p-4 rounded-lg bg-[#A3E2C9]/10 border border-[#A3E2C9]/40 flex flex-col items-center gap-2">
+        <div className="mt-4 md:mt-6 p-4 rounded-lg bg-[#A3E2C9]/10 border border-[#A3E2C9]/40 flex flex-col items-center gap-2">
           {/* How It Works Icon 4: Cashback coin icon (assets/icon_cashback_coin.png) */}
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-mint shadow-[0_0_8px_rgba(163,226,201,0.5)] animate-pulse" />
@@ -141,7 +139,7 @@ export function SystemLoop() {
       </div>
 
       {/* Title block */}
-      <div className="layout-grid pt-16 md:pt-28 pb-4">
+      <div className="layout-grid pt-16 lg:pt-28 pb-4">
         <div className="col-span-4 lg:col-span-12 flex flex-col gap-2">
           <span className="text-xs font-mono tracking-[0.2em] text-[#1a2e22]/70 uppercase font-semibold">
             CHAPTER 3 // HOW IT WORKS
@@ -169,7 +167,7 @@ export function SystemLoop() {
             {/* Lightweight Minimalist Segment Card */}
             <div 
               tabIndex={0}
-              className="w-full max-w-md p-8 md:p-10 rounded-2xl border border-black/5 bg-[#ffffff]/60 backdrop-blur-md transition-all duration-300 hover:border-mint hover:shadow-lg focus:border-mint focus:bg-[#ffffff]/90 focus-visible:outline-none"
+              className="w-full max-w-md p-6 md:p-8 lg:p-10 rounded-2xl border border-black/5 bg-[#ffffff]/60 backdrop-blur-md transition-all duration-300 hover:border-mint hover:shadow-lg focus:border-mint focus:bg-[#ffffff]/90 focus-visible:outline-none"
             >
               {/* Card Index Header */}
               <div className="flex justify-between items-baseline mb-6 border-b border-black/5 pb-4">

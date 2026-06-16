@@ -9,10 +9,10 @@ export function AccountWallet({ triggerReward }) {
   
   // Return transactions timeline log database simulation
   const transactions = [
-    { id: 'TX-9421', cafe: 'Subko Cafe Node', time: 'Today, 10:14 AM', deposit: '₹50.00', status: 'Refunded', isReturned: true },
-    { id: 'TX-9388', cafe: 'Blue Tokai T2 Bin', time: 'Yesterday, 04:32 PM', deposit: '₹50.00', status: 'Refunded', isReturned: true },
-    { id: 'TX-9310', cafe: 'Araku Coffee Juhu', time: '10 Jun 2026, 01:15 PM', deposit: '₹50.00', status: 'In Escrow', isReturned: false },
-    { id: 'TX-9128', cafe: 'Third Wave Node', time: '05 Jun 2026, 09:40 AM', deposit: '₹50.00', status: 'Refunded', isReturned: true }
+    { id: 'TX-9421', cafe: 'Cafe 1 Node', time: 'Today, 10:14 AM', deposit: '₹50.00', status: 'Refunded', isReturned: true },
+    { id: 'TX-9388', cafe: 'Cafe 2 Bin', time: 'Yesterday, 04:32 PM', deposit: '₹50.00', status: 'Refunded', isReturned: true },
+    { id: 'TX-9310', cafe: 'Cafe 3 Node', time: '10 Jun 2026, 01:15 PM', deposit: '₹50.00', status: 'In Escrow', isReturned: false },
+    { id: 'TX-9128', cafe: 'Cafe 4 Node', time: '05 Jun 2026, 09:40 AM', deposit: '₹50.00', status: 'Refunded', isReturned: true }
   ];
 
   const handleWithdraw = (e) => {

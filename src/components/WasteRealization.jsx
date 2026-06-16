@@ -17,12 +17,12 @@ export function WasteRealization() {
 
     if (!section || !leftCol || !rightCol) return;
 
-    // 1. GSAP matchMedia to enable pinning on Desktop (>768px) and disable on Mobile (<=768px)
+    // 1. GSAP matchMedia to enable pinning on Desktop (>=1024px) and disable on Mobile/Tablet (<1024px)
     let ctx = gsap.context(() => {
       let mm = gsap.matchMedia();
 
       // Desktop layout: Pinned Left side, Scrolling Right side
-      mm.add("(min-width: 769px)", () => {
+      mm.add("(min-width: 1024px)", () => {
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
@@ -93,13 +93,13 @@ export function WasteRealization() {
         {/* Left Column Panel: Sticky Anchor Container on desktop */}
         <div 
           ref={leftColRef}
-          className="col-span-4 lg:col-span-5 w-full md:h-screen flex flex-col justify-center py-6 md:py-0"
+          className="col-span-4 lg:col-span-5 w-full lg:h-screen flex flex-col justify-center py-6 lg:py-0"
         >
           <div className="flex flex-col gap-3 max-w-md">
             <span className="text-xs font-mono text-mint tracking-[0.2em] font-semibold uppercase">
               CHAPTER 2 // STRATEGIC MISSION
             </span>
-            <h2 className="display-header text-[32px] md:text-[44px] lg:text-[56px] font-bold leading-[1.10] tracking-[-0.03em] text-light-cream animate-fade-in">
+            <h2 className="display-header text-[22px] md:text-[28px] lg:text-[28px] xl:text-[34px] 2xl:text-[40px] font-bold leading-[1.15] tracking-[-0.02em] text-light-cream animate-fade-in">
               We exist to make reuse second nature for beverage lovers across India. By partnering with local cafes, we're building a seamless, circular borrow-and-return system that eliminates single-use cups entirely, keeping our oceans clean and our communities thriving.
             </h2>
             <div className="w-12 h-1 bg-mint mt-6 rounded-full" />

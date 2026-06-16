@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import productLifestyle from '../assets/product_lifestyle.png';
 import heroBackground from '../assets/hero_background.png';
 import MagneticButton from './MagneticButton';
 
@@ -108,7 +107,7 @@ export function Hero({ setRoute }) {
 
           {/* Hero Subtext */}
           <p className="hero-fade-in interface-text text-base md:text-lg text-light-cream/90 max-w-xl text-center leading-[1.60] mt-2">
-            A community-driven movement encouraging everyone to say no to single-use cups, one refill at a time.
+            A reusable cup company encouraging everyone to say no to single-use cups, one refill at a time.
           </p>
 
           {/* Multi-button action layout */}
@@ -133,16 +132,6 @@ export function Hero({ setRoute }) {
             >
               For Cafes
             </MagneticButton>
-          </div>
-
-          {/* Landing cup image mockup fallback */}
-          <div className="mt-8 w-60 h-60 md:w-80 md:h-80 flex items-center justify-center pointer-events-none select-none">
-            <img 
-              src={productLifestyle} 
-              alt="Takeback smart coffee cup mockup walking through city market" 
-              className="w-full h-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.35)] animate-pulse"
-              style={{ animationDuration: '4s' }}
-            />
           </div>
 
         </div>

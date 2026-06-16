@@ -3,32 +3,32 @@ import MagneticButton from './MagneticButton';
 
 export function OperatorTrust() {
   const brands = [
-    'Subko Coffee',
-    'Blue Tokai',
-    'Third Wave Coffee',
-    'Araku Coffee',
-    'KC Roasters',
-    'Koinonia Coffee',
-    'Blue Bottle Coffee'
+    'Cafe 1',
+    'Cafe 2',
+    'Cafe 3',
+    'Cafe 4',
+    'Cafe 5',
+    'Cafe 6',
+    'Cafe 7'
   ];
 
   const testimonials = [
     {
       quote: "Implementing Takeback resolved our waste management and B2B carbon accounting. Reusing smart vessels allowed us to completely drop single-use paper cups.",
       operator: "Rahul Sharma, Operational Lead",
-      cafe: "Subko Coffee, Mumbai",
+      cafe: "Cafe 1",
       metric: "14,200 cups diverted • ₹2,13,000 saved"
     },
     {
       quote: "Our customer feedback has been exceptional. The UPI refund workflow takes less than 3 seconds, blending B2C reward programs cleanly into sustainable loops.",
       operator: "Ananya Roy, General Manager",
-      cafe: "Blue Tokai, Delhi NCR",
+      cafe: "Cafe 2",
       metric: "45,800 cups diverted • ₹6,87,000 saved"
     },
     {
       quote: "Operational integration was near frictionless. Partnered cafes process returns automatically and trigger database updates directly to our inventory trackers.",
       operator: "Vikram Sen, Tech Lead",
-      cafe: "Third Wave Coffee, Bangalore",
+      cafe: "Cafe 3",
       metric: "29,400 cups diverted • ₹4,41,000 saved"
     }
   ];
@@ -46,7 +46,7 @@ export function OperatorTrust() {
   return (
     <section 
       id="operator-trust-section"
-      className="relative min-h-screen w-full bg-[#F7F5F0] text-[#0B0F12] border-t border-black/5 flex flex-col justify-between py-16 md:py-24"
+      className="relative min-h-screen w-full bg-[#F7F5F0] text-[#0B0F12] border-t border-black/5 flex flex-col justify-between py-16 lg:py-20 xl:py-24"
     >
       {/* Infinite scrolling marquee stylesheet */}
       <style>{`
@@ -171,7 +171,7 @@ export function OperatorTrust() {
       </div>
 
       {/* B2B Teaser Block */}
-      <div className="layout-grid py-12 border-t border-black/10 my-8">
+      <div className="layout-grid py-12 border-t border-black/10 my-4 lg:my-8">
         <div className="col-span-4 lg:col-span-12 flex flex-col md:flex-row items-center justify-between gap-6 bg-white/40 border border-black/5 p-8 rounded-2xl shadow-sm">
           <div className="flex flex-col gap-2 max-w-xl text-left">
             <span className="text-[10px] font-mono tracking-wider text-black/50 uppercase font-semibold">

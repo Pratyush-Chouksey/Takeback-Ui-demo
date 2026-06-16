@@ -4,56 +4,56 @@ import MagneticButton from './MagneticButton';
 export function ReturnMap({ triggerReward }) {
   const [returnState, setReturnState] = useState('idle'); // idle, checking, refunded
   const [selectedCafe, setSelectedCafe] = useState({
-    id: 'thirdwave',
-    name: 'Third Wave Coffee Co.',
+    id: 'cafe1',
+    name: 'Cafe 1',
     nodes: '14 Urban Hub Nodes',
-    location: 'Bengaluru Core',
+    location: 'Location 1',
     x: 180,
     y: 220,
     dist: '1.2 km',
-    description: 'Active drop points covering Indiranagar, Koramangala, and HSR Layout.'
+    description: 'Active drop points covering Area A, Area B, and Area C.'
   });
 
   const cafes = [
     {
-      id: 'thirdwave',
-      name: 'Third Wave Coffee Co.',
+      id: 'cafe1',
+      name: 'Cafe 1',
       nodes: '14 Urban Hub Nodes',
-      location: 'Bengaluru Core',
+      location: 'Location 1',
       x: 180,
       y: 220,
       dist: '1.2 km',
-      description: 'Active drop points covering Indiranagar, Koramangala, and HSR Layout.'
+      description: 'Active drop points covering Area A, Area B, and Area C.'
     },
     {
-      id: 'bluetokai',
-      name: 'Blue Tokai Coffee Roasters',
+      id: 'cafe2',
+      name: 'Cafe 2',
       nodes: '22 Metro Nodes',
-      location: 'Mumbai/Delhi Capital Region',
+      location: 'Location 2',
       x: 280,
       y: 130,
       dist: '3.4 km',
-      description: 'Active drop points covering Bandra, Colaba, Safdarjung, and CyberCity.'
+      description: 'Active drop points covering Area D, Area E, and Area F.'
     },
     {
-      id: 'subko',
-      name: 'Subko Coffee Roasters',
+      id: 'cafe3',
+      name: 'Cafe 3',
       nodes: '6 Specialty Nodes',
-      location: 'Bandra/Colaba Districts',
+      location: 'Location 3',
       x: 110,
       y: 310,
       dist: '0.8 km',
       description: 'Specialty nodes featuring integrated return drawer bays.'
     },
     {
-      id: 'araku',
-      name: 'Araku Coffee',
+      id: 'cafe4',
+      name: 'Cafe 4',
       nodes: '2 flagship Heritage Nodes',
-      location: 'Indiranagar Hub',
+      location: 'Location 4',
       x: 310,
       y: 280,
       dist: '1.9 km',
-      description: 'Flagship return node equipped with automatic weigh scale detectors.'
+      description: 'Flagship return node equipped with automatic return bins.'
     }
   ];
 

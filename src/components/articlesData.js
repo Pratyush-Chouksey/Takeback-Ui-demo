@@ -4,7 +4,7 @@ export const categories = {
   'Sustainability': 'Environmental policy, waste reduction, and climate action deep-dives.',
   'How-To': 'Guides and step-by-step instructions for sustainable cafe logistics.',
   'Impact': 'Data-driven progress tracking and annual network statistics.',
-  'News': 'Announcements, partner launches, and updates from Goa.'
+  'News': 'Announcements, partner launches, and updates.'
 };
 
 export const articles = [
@@ -14,25 +14,25 @@ export const articles = [
     author: 'Founder & Labs',
     readTime: '10 min read',
     aspect: 'aspect-[4/3]',
-    description: "An editorial look back at that crisp Goa morning in 2024 that sparked a circular movement to save India's coastlines.",
+    description: "An editorial look back at how a simple daily ritual sparked a circular movement to replace single-use cups.",
     illustration: 'hero',
     content: `
-It all started on a crisp morning at my local beach in Goa back in 2024. I was sitting on the sand, watching the surf roll in, cradling my morning flat white or tea. It’s a ritual that millions of us share—a moment of quiet pause before the day begins, fueled by the rich, comforting warmth of a good brew. But as the sun climbed higher, I noticed something else dotting the shoreline. Tucked into the rocks and half-buried in the sand were paper takeaway cups. Dozens of them. That morning, the magic of my daily ritual was broken by a stark reality: our love for daily drinks was leaving a devastating mark on the places we cherish most.
+It all started with a simple observation of a daily ritual. Every morning, millions of us grab our favorite warm drink—a coffee, a tea, a comforting brew that fuels our day. It’s a moment of quiet pause before the rush begins. But look closer at any café trash bin or city street corner, and a stark reality emerges. Tucked into corners, overflowing from waste baskets, and littering our public spaces are paper takeaway cups. Dozens of them, discarded in seconds but remaining on our planet for centuries.
 
-When I looked into the numbers, the scale of the issue blew me away. In India alone, we go through over one billion single-use cups every single year. Most people believe these cups are harmlessly composted or recycled, but the reality is far more challenging. Almost all takeaway cups are lined with a thin, heat-bonded polyethylene plastic film to keep them waterproof. Because of this laminate, they cannot be recycled through standard facilities, meaning nearly every single cup ended up in a landfill or scattered across our coastlines and bushlands. 
+When we looked into the numbers, the scale of the issue was staggering. We go through billions of single-use cups every year. Most people believe these cups are harmlessly composted or recycled, but the reality is far more challenging. Almost all takeaway cups are lined with a thin, heat-bonded plastic film to keep them waterproof. Because of this laminate, they cannot be recycled through standard facilities, meaning nearly every single cup ended up in a landfill or scattered across our natural landscapes.
 
-I knew we couldn't go on like this, but I also knew that asking everyone to carry reusable cups everywhere wasn't working. Life gets busy, we forget our flasks in the car, or we decide on a drink spur of the moment. We didn't need to change people's love for daily drinks; we needed to change the system around it. That’s how the idea for TakeBack was born. I wanted to build a simple, circular network where a reusable cup could be borrowed at one cafe and returned at any other, making reuse the absolute easiest choice for every Indian.
+I knew we couldn't go on like this, but I also knew that asking everyone to carry reusable cups everywhere wasn't working. Life gets busy, we forget our flasks at home, or we decide on a drink spur of the moment. We didn't need to change people's love for daily drinks; we needed to change the system around it. That’s how the idea for TakeBack was born. I wanted to build a simple, circular network where a reusable cup could be borrowed at one cafe and returned at any other, making reuse the absolute easiest choice for everyone.
 
-We gathered a passionate team of local designers, material scientists, and cafe owners. We spent months sketching, testing, and refining. We wanted a cup that felt amazing to hold, insulated the drinks beautifully, and stood up to the rigors of daily washing. The result was our signature husk vessel—crafted from upcycled coffee husks that would otherwise go to waste, combined with food-grade circular poly-composites. It is beautiful, durable, and designed to circulate for 150 washes.
+We gathered a passionate team of local designers, material scientists, and cafe owners. We spent months sketching, testing, and refining. We wanted a cup that felt amazing to hold, insulated the drinks beautifully, and stood up to the rigors of daily washing. The result was our signature vessel—crafted from upcycled organic materials combined with food-grade circular poly-composites. It is beautiful, durable, and designed to circulate for hundreds of washes.
 
 /* PRODUCT_LINK: /shop?sku=12oz (12oz Cafe Regular) */
 // LINK PLACEHOLDER: /shop?sku=12oz
 
-But a great cup is only half the loop. We engineered a seamless, connected system of partnered café drop points. By placing these return counters at neighborhood cafes, campus hubs, and transit stations, we’ve created a frictionless network. A quick scan of the base QR code registers your cup, and returning it takes just seconds, rewarding you with ₹15 cashback directly to your wallet. It's a self-sustaining ecosystem built on community, trust, and shared responsibility.
+But a great cup is only half the loop. We engineered a seamless, connected system of partnered café drop points. By placing these return counters at neighborhood cafes, campus hubs, and transit stations, we’ve created a frictionless network. A quick scan of the qr code registers your cup, and returning it takes just seconds, rewarding you with cashback directly to your wallet. It's a self-sustaining ecosystem built on community, trust, and shared responsibility.
 
-From our humble beginnings in a single coastal cafe, TakeBack has grown into a thriving network of over 140 nodes across India's capital cities and regional hubs. We’re incredibly proud to partner with legendary roasters and local cafes who share our vision of a clean, circular future. For us, TakeBack isn’t about compromising on convenience or guilt-tripping drinkers; it's about celebrating our incredible beverage culture while keeping India’s beautiful landscapes clean for generations to come. Every cup borrowed is one less cup binned, and together, we are closing the loop on waste.
+From our humble beginnings, TakeBack has grown into a thriving network of nodes across multiple cities and regional hubs. We’re incredibly proud to partner with local cafes who share our vision of a clean, circular future. For us, TakeBack isn’t about compromising on convenience or guilt-tripping drinkers; it's about celebrating our incredible beverage culture while keeping our beautiful landscapes clean for generations to come. Every cup borrowed is one less cup binned, and together, we are closing the loop on waste.
 
-As we look to the future, our mission remains clear: to replace single-use cups entirely. It requires a massive shifts in logistics, consumer habits, and retail cooperation. But seeing our fluted green vessels in the hands of commuters, surfers, and students across India makes every hurdle worth it. We are not just building a product; we are curating a legacy of environmental respect. A cup that honors the drink it holds and the earth it came from. That is the circular promise of TakeBack.
+As we look to the future, our mission remains clear: to replace single-use cups entirely. It requires a massive shifts in logistics, consumer habits, and retail cooperation. But seeing our fluted green vessels in the hands of commuters, surfers, and students makes every hurdle worth it. We are not just building a product; we are curating a legacy of environmental respect. A cup that honors the drink it holds and the earth it came from. That is the circular promise of TakeBack.
 
 /* PRODUCT_LINK: /shop?sku=8oz (8oz Espresso Vessel) */
 // LINK PLACEHOLDER: /shop?sku=8oz
@@ -51,7 +51,7 @@ Joining the TakeBack circle is incredibly simple. Here is how our zero-friction 
 
 Step 1: Find a participating café using the interactive map in our Progressive Web App. When ordering your drink, ask the barista for a TakeBack circular cup instead of a single-use paper vessel.
 
-Step 2: Use our web app to scan the laser-debossed QR code on the lower base band of the cup. This links the vessel to your profile and pre-authorizes a ₹50.00 refundable deposit.
+Step 2: Use our web app to scan the debossed qr code on the lower base band of the cup. This links the vessel to your profile and pre-authorizes a ₹50.00 refundable deposit.
 
 /* PRODUCT_LINK: /shop?sku=12oz (12oz Cafe Regular) */
 // LINK PLACEHOLDER: /shop?sku=12oz
@@ -84,20 +84,20 @@ TakeBack offers an alternative: a durable, upcycled husk cup that circulates 150
   },
   {
     category: 'News',
-    title: '5 Cafés Doing Sustainability Right in Goa',
+    title: '5 Cafés Doing Sustainability Right',
     author: 'Culture Dept',
     readTime: '5 min read',
     aspect: 'aspect-[4/3]',
-    description: 'Highlighting five legendary local roasters and cafés leading the transition to zero-waste packaging.',
+    description: 'Highlighting five local cafes leading the transition to zero-waste packaging.',
     illustration: 'cafes',
     content: `
-Goa is home to some of India's most forward-thinking beverage operators. Here are five venues leading the sustainable movement:
+Venues are leading the sustainable movement:
 
-1. Third Wave Coffee Co.: Leading the charge by integrating TakeBack return counters directly inside their counter layouts.
-2. Blue Tokai Coffee Roasters: Sourcing organic beans and offering cashback incentives for circular members.
-3. Subko Coffee Roasters: A hub of specialty coffee craft implementing zero-plastic packaging guidelines.
-4. Araku Coffee: Focusing on regenerative organic agriculture and closed-loop waste management.
-5. Bay Leaf Café: A local legend serving organic brews in our signature husk vessels.
+1. Cafe 1: Leading the charge by integrating TakeBack return counters directly inside their counter layouts.
+2. Cafe 2: Sourcing organic beans and offering cashback incentives for circular members.
+3. Cafe 3: A hub of specialty coffee craft implementing zero-plastic packaging guidelines.
+4. Cafe 4: Focusing on regenerative organic agriculture and closed-loop waste management.
+5. Cafe 5: A local legend serving organic brews in our signature vessels.
 
 These operators show that premium drinks and planet-friendly systems go hand in hand.
 

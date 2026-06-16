@@ -27,7 +27,7 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
 
   const specs = [
     { label: 'Thermal Shield', val: 'Double-wall structural lock' },
-    { label: 'Asset Identifier', val: 'High-density laser QR engraving' },
+    { label: 'Asset Identifier', val: 'High-density QR engraving' },
     { label: 'Material Density', val: '18/8 Austenitic Stainless Steel' },
   ];
 
@@ -36,12 +36,12 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
       id="product-configurator-section"
       className="relative min-h-screen w-full bg-[#F4F3EF] text-[#0B0F12] border-t border-black/5"
     >
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
+      <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-16 lg:py-20 xl:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
         
         {/* Left Viewport Panel: Display the selected color variant image directly */}
         <div 
           id="configurator-viewport"
-          className="relative w-full h-[350px] md:h-[550px] rounded-2xl bg-white/40 border border-black/5 flex items-center justify-center overflow-hidden shadow-inner p-6"
+          className="relative w-full h-[320px] md:h-[450px] lg:h-[500px] xl:h-[550px] rounded-2xl bg-white/40 border border-black/5 flex items-center justify-center overflow-hidden shadow-inner p-6"
         >
           <img 
             src={cupImages[activeVariant.name] || forestCup} 
@@ -62,17 +62,23 @@ export function ProductConfigurator({ activeVariant, onColorwayChange }) {
           </div>
 
           <p className="interface-text text-sm md:text-base text-black/75 leading-[1.60] max-w-lg">
-            Engineered for longevity and seamless return cycles. Double-wall vacuum configurations retain beverage temperatures while surviving 150 commercial dishwasher washes. Crafted from upcycled coffee husks (waste skins of coffee cherries) blended with 100% BPA-free and certified non-toxic food-grade circular poly-composites.
+            ---- (Data to be collected from TakeBack: Cup ID, User ID, Location ID, Timestamp, Deposit/Refund Status, Cycle Count)
           </p>
 
           {/* Technical Specs list */}
           <div className="space-y-2 border-t border-black/10 pt-4 font-mono text-xs max-w-lg">
-            {specs.map((spec, i) => (
-              <div key={i} className="flex justify-between border-b border-black/5 pb-2 last:border-0 last:pb-0">
-                <span className="text-black/50">{spec.label}</span>
-                <span className="font-semibold text-black/95">{spec.val}</span>
-              </div>
-            ))}
+            <div className="flex justify-between border-b border-black/5 pb-2">
+              <span className="text-black/50">Thermal Shield</span>
+              <span className="font-semibold text-black/95">Double-wall structural lock</span>
+            </div>
+            <div className="flex justify-between border-b border-black/5 pb-2">
+              <span className="text-black/50">Asset Identifier</span>
+              <span className="font-semibold text-black/95">High-density QR engraving</span>
+            </div>
+            <div className="flex justify-between border-b border-black/5 pb-2">
+              <span className="text-black/50">Material Density</span>
+              <span className="font-semibold text-black/95">18/8 Austenitic Stainless Steel</span>
+            </div>
           </div>
 
           {/* Colorway Switcher Component */}

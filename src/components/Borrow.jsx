@@ -63,17 +63,17 @@ export function Borrow({ triggerReward }) {
           </div>
 
           <p className="interface-text text-sm md:text-base text-white/70 leading-[1.60] max-w-md">
-            Scan the laser QR code on the lower base band of any smart cup. A refundable deposit of ₹50.00 will be locked and settled instantly upon return.
+            Scan the qr code on the lower base band of any smart cup. A refundable deposit of ₹50.00 will be locked and settled instantly upon return.
           </p>
 
           {/* Borrow/Return 4-step isometric flow illustration stub: assets/isometric_flow.png */}
           {/* 4-Step Borrow/Return Process List */}
           <div className="flex flex-col gap-3.5 my-6 border-t border-b border-white/10 py-5 max-w-md">
             <div className="flex gap-3 text-xs leading-relaxed">
-              <span className="font-mono text-mint font-bold">01 /</span> Find an active partnered café on our live map to grab a fresh circular beverage vessel.
+              <span className="font-mono text-mint font-bold">01 /</span> Find Cafe 1 or Cafe 2 on our live map to grab a fresh circular beverage vessel.
             </div>
             <div className="flex gap-3 text-xs leading-relaxed">
-              <span className="font-mono text-mint font-bold">02 /</span> Scan the laser-debossed base QR code using our web app to link the cup to your account.
+              <span className="font-mono text-mint font-bold">02 /</span> Scan the debossed base qr code using our web app to link the cup to your account.
             </div>
             <div className="flex gap-3 text-xs leading-relaxed">
               <span className="font-mono text-mint font-bold">03 /</span> Enjoy your warm or cold drink in a fluted, non-toxic husk composite cup with zero plastic lining.

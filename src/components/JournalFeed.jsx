@@ -20,7 +20,7 @@ export function JournalFeed() {
     hero: <img src={blog1} alt="Why We Started TakeBack — The Founder's Story" className="w-full h-full object-cover" />,
     loop: <img src={blog2} alt="How Our Borrow & Return System Works (Step by Step)" className="w-full h-full object-cover" />,
     cost: <img src={blog3} alt="The Real Cost of Disposable Coffee Cups in India" className="w-full h-full object-cover" />,
-    cafes: <img src={blog4} alt="5 Cafés Doing Sustainability Right in Goa" className="w-full h-full object-cover" />,
+    cafes: <img src={blog4} alt="5 Cafés Doing Sustainability Right" className="w-full h-full object-cover" />,
     footprint: <img src={blog5} alt="How to Reduce Your Daily Coffee Carbon Footprint" className="w-full h-full object-cover" />,
     comparison: <img src={blog6} alt="TakeBack vs. Other Reusable Cups — What's Different?" className="w-full h-full object-cover" />,
     materials: <img src={blog7} alt="Behind the Cup — Where Our Materials Come From" className="w-full h-full object-cover" />,

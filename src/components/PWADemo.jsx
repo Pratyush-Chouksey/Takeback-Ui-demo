@@ -46,7 +46,7 @@ export function PWADemo() {
         }
       `}</style>
 
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+      <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-16 lg:py-20 xl:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
         
         {/* Left Column Segment: Conceptual explainer blocks */}
         <div className="flex flex-col gap-6">
